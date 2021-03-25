@@ -11,12 +11,12 @@ const wrapperModifiers = {
   medium: (theme: DefaultTheme) => css`
     height: 4rem;
     font-size: ${theme.font.sizes.small};
-    padding: ${theme.spacings.xxsmall} ${theme.spacings.medium}
+    padding: ${theme.spacings.xxsmall} ${theme.spacings.medium};
   `,
   large: (theme: DefaultTheme) => css`
     height: 5rem;
     font-size: ${theme.font.sizes.medium};
-    padding: ${theme.spacings.xxsmall} ${theme.spacings.xlarge}
+    padding: ${theme.spacings.xxsmall} ${theme.spacings.xlarge};
   `
 }
 
@@ -25,9 +25,9 @@ export const Wrapper = styled.button<WrapperProps>`
     background: linear-gradient(180deg, #ff5f5f 0%, #f062c0 50%);
     color: ${theme.colors.white};
     border: 0;
-    border-radius: ${theme.border.radius}
-    padding: ${theme.spacings.xxsmall}
+    border-radius: ${theme.border.radius};
+    padding: ${theme.spacings.xxsmall};
 
-    ${!!size && wrapperModifiers[size](theme)}
+    ${!!size && wrapperModifiers[size](theme)};
   `}
 `
