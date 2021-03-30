@@ -13,7 +13,7 @@ const wrapperModifiers = {
     height: 5.9rem;
   `,
   hideOnMobile: () => css`
-    ${media.lessThan("medium")`
+    ${media.lessThan('medium')`
     width: 5.8rem;
     height: 4.5rem;
 
@@ -21,7 +21,7 @@ const wrapperModifiers = {
       height: 4.5rem
     }
     .text{
-      display:none
+      display:none;
       //desabilita a parte none de ser clicavel
       pointer-events:none;
     }
