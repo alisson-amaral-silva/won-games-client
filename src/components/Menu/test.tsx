@@ -28,8 +28,25 @@ describe('<Menu  />', () => {
     expect(fullMenuElement).toHaveStyle({opacity: 1})
 
     // clicar no botão de fechar o menu e verificar se ele fechou
-    fireEvent.click(screen.getByLabelText(/cluse menu/i))
+    fireEvent.click(screen.getByLabelText(/close menu/i))
     expect(fullMenuElement.getAttribute('aria-hidden')).toBe('true')
     expect(fullMenuElement).toHaveStyle({opacity: 0})
+  })
+
+  it('should show register box when logged out', () => {
+    renderWithTheme(<Menu />)
+    expect(screen.getByText(/Log in now/i)).toBeInTheDocument();
+    expect(screen.getByText(/Sign Up/i)).toBeInTheDocument();
+  })
+
+  it('should not show register box when logged out', () => {
+    renderWithTheme(<Menu username='Alisson' />)
+
+    //para procuar algo que possa nãp estar na tela = query otherwise getByFodac
+    expect(screen.queryByText(/Log in now/i)).not.toBeInTheDocument();
+    expect(screen.queryByText(/Sign Up/i)).not.toBeInTheDocument();
+
+    expect(screen.getByText(/My account/i)).toBeInTheDocument();
+    expect(screen.getByText(/Wishlist/i)).toBeInTheDocument();
   })
 })
