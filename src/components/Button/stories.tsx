@@ -9,8 +9,8 @@ export default {
     children: {
       type: 'string'
     },
-    icon:{
-      type:''
+    icon: {
+      type: ''
     }
   }
 } as Meta
@@ -22,7 +22,16 @@ Default.args = { children: 'Buy now' }
 export const WithIcon: Story = (args) => <Button {...args} />
 
 WithIcon.args = {
-  size:'small',
+  size: 'small',
   children: 'Buy now',
   icon: <AddShoppingCart />
+}
+
+export const asLink: Story = (args) => <Button {...args} />
+
+asLink.args = {
+  size: 'small',
+  children: 'Buy now',
+  as: 'a',
+  href: '/link'
 }
