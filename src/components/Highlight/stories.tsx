@@ -4,13 +4,27 @@ import Highlight, { HighlightProps } from '.'
 export default {
   title: 'Highlight',
   component: Highlight,
-  args:{
-    title: 'Red Dead its back',
-    subtitle:'Come see Johns new adventures',
+  args: {
+    title: 'Read Dead is back!',
+    subtitle: 'Come see John’s new adventures',
+    backgroundImage: '/img/red-dead-img.jpg',
     buttonLabel: 'Buy now',
-    buttonLink:'/rd2',
-    backgroundImage:'/img/red-dead-img.jpg'
+    buttonLink: '/games/rdr2'
   }
 } as Meta
 
-export const Basic: Story<HighlightProps> = (args) => <Highlight {...args}/>
+export const Default: Story<HighlightProps> = (args) => (
+  <div style={{ maxWidth: '104rem' }}>
+    <Highlight {...args} />
+  </div>
+)
+
+export const WithFloatImage: Story<HighlightProps> = (args) => (
+  <div style={{ maxWidth: '104rem' }}>
+    <Highlight {...args} />
+  </div>
+)
+
+WithFloatImage.args = {
+  floatImage: '/img/red-dead-float.png'
+}

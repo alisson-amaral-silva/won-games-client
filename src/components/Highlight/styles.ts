@@ -12,6 +12,7 @@ export const Wrapper = styled.section<WrapperProps>`
     background-image: url(${backgroundImage});
     background-position: center center;
     background-size: cover;
+    grid-template-areas: 'floatimage content';
 
     &::after {
       content: '';
@@ -29,6 +30,7 @@ export const Wrapper = styled.section<WrapperProps>`
 
 export const Content = styled.div`
   ${({ theme }) => css`
+    grid-area: content;
     z-index: ${theme.layers.base};
     text-align: right;
     padding: ${theme.spacings.xsmall};
@@ -58,6 +60,20 @@ export const Subtitle = styled.h3`
     font-weight: ${theme.font.bold};
     margin-bottom: ${theme.spacings.medium};
     color: ${theme.colors.white};
+
+    ${media.greaterThan('medium')`
+      font-size: ${theme.font.sizes.large};
+    `}
+  `}
+`
+
+export const FloatImage = styled.img`
+  ${({ theme }) => css`
+    grid-area: floatimage;
+    z-index: ${theme.layers.base};
+    max-height: 23rem;
+    max-width: 100%;
+    align-self: end;
 
     ${media.greaterThan('medium')`
       font-size: ${theme.font.sizes.large};
