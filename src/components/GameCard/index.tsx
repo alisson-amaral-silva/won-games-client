@@ -1,7 +1,11 @@
 import * as S from './styles'
-import {FavoriteBorder} from '@styled-icons/material-outlined/FavoriteBorder'
-import { AddShoppingCart } from '@styled-icons/material-outlined/AddShoppingCart'
+import {
+  FavoriteBorder,
+  Favorite,
+  AddShoppingCart
+} from '@styled-icons/material-outlined'
 import Button from '../Button'
+import Ribbon, { RibbonColors, RibbonSize } from '../Ribbon'
 
 export type GameCardProps = {
   title: string
@@ -9,10 +13,31 @@ export type GameCardProps = {
   img: string
   price: string
   promotionalPrice?: string
+  favorite?: boolean
+  onFav?: () => void
+  ribbon?: React.ReactNode
+  ribbonColor?: RibbonColors
+  ribbonSize?: RibbonSize
 }
 
-const GameCard = ({ developer, title, img, price, promotionalPrice }: GameCardProps) => (
+const GameCard = ({
+  developer,
+  title,
+  img,
+  price,
+  promotionalPrice,
+  favorite = false,
+  onFav,
+  ribbon,
+  ribbonColor = 'primary',
+  ribbonSize = 'normal'
+}: GameCardProps) => (
   <S.Wrapper>
+    {!!ribbon && (
+      <Ribbon color={ribbonColor} size={ribbonSize}>
+        {ribbon}
+      </Ribbon>
+    )}
     <S.ImageBox>
       <img src={img} alt={title} />
     </S.ImageBox>
@@ -21,12 +46,16 @@ const GameCard = ({ developer, title, img, price, promotionalPrice }: GameCardPr
         <S.Title>{title}</S.Title>
         <S.Developer>{developer}</S.Developer>
       </S.Info>
-      <S.FavButton role="button">
-        <FavoriteBorder aria-label="Add to Wishlist" />
+      <S.FavButton onClick={onFav} role="button">
+        {favorite ? (
+          <Favorite aria-label="Remove from wishlist" />
+        ) : (
+          <FavoriteBorder aria-label="Add to Wishlist" />
+        )}
       </S.FavButton>
       <S.BuyBox>
         {!!promotionalPrice && <S.Price isPromotional>{price}</S.Price>}
-        <S.Price>{promotionalPrice || price}</S.Price>
+        <S.Price data-testid="price">{promotionalPrice || price}</S.Price>
         <Button icon={<AddShoppingCart />} size="small" />
       </S.BuyBox>
     </S.Content>
