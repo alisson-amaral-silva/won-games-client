@@ -9,7 +9,13 @@ export default {
     developer: 'Rockstar Games',
     img:
       'https://avatars.githubusercontent.com/u/60556153?s=400&u=2b0f7c18e8adff995f5cc65423d3608804d36a6b&v=4',
-    price: 'R$ 235,00'
+    price: 'R$ 235,00',
+    promotionalPrice: 'R$ 200,00'
+  },
+  parameters: {
+    backgrounds: {
+      default: 'dark'
+    }
   }
 } as Meta
 
