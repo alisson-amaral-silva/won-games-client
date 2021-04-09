@@ -8,7 +8,6 @@ describe('<{{pascalCase name}}  />', () => {
       screen.getByRole('heading', { name: /{{pascalCase name}} /i })
     ).toBeInTheDocument()
 
-    expect(container.firstChild).toMatchSnapshot()
   })
 
 })
