@@ -1,3 +1,4 @@
+import 'match-media-mock'
 import { screen } from '@testing-library/react'
 import { renderWithTheme } from 'utils/tests/helper'
 import GameCardSlider from '.'
@@ -43,9 +44,7 @@ const items = [
 describe('<GameCardSlider  />', () => {
   it('should render the heading', () => {
     const { container } = renderWithTheme(<GameCardSlider items={items} />)
-    expect(
-      screen.getByRole('heading', { name: /GameCardSlider /i })
-    ).toBeInTheDocument()
+    expect(container.querySelectorAll('.slick-active')).toHaveLength(4)
 
   })
 
