@@ -4,16 +4,12 @@ import * as S from './styles'
 import Slider, { SliderSettings } from '../Slider'
 import GameCard,{ GameCardProps } from '../GameCard'
 
-export type GameCardSliderProps = {
-  items: GameCardProps[]
-  color?: 'white' | 'black'
-}
-
 const settings: SliderSettings = {
   arrows:true,
   slidesToShow: 4,
   infinite: false,
-  lazyLoad: 'ondemand', responsive: [
+  lazyLoad: 'ondemand',
+  responsive: [
     {
       breakpoint: 1375,
       settings: {
@@ -45,6 +41,11 @@ const settings: SliderSettings = {
   ],
   nextArrow: <ArrowRight aria-label="next games" />,
   prevArrow: <ArrowRight aria-label="previous games" />
+}
+
+export type GameCardSliderProps = {
+  items: GameCardProps[]
+  color?: 'white' | 'black'
 }
 
 const GameCardSlider = ({ items, color = 'white' }: GameCardSliderProps) => (
