@@ -10,6 +10,7 @@ export type GameCardSliderProps = {
 }
 
 const settings: SliderSettings = {
+  arrows:true,
   slidesToShow: 4,
   infinite: false,
   lazyLoad: 'ondemand', responsive: [
@@ -46,7 +47,7 @@ const settings: SliderSettings = {
   prevArrow: <ArrowRight aria-label="previous games" />
 }
 
-const GameCardSlider = ({ items, color = 'black' }: GameCardSliderProps) => (
+const GameCardSlider = ({ items, color = 'white' }: GameCardSliderProps) => (
   <S.Wrapper color={color}>
     <Slider settings={settings}>
       {items.map((item, index) => (
