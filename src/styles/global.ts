@@ -47,11 +47,11 @@ const GlobalStyles: GlobalStyleComponent<
     box-sizing: border-box;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-
     &::before,
     &::after {
       box-sizing: inherit;
     }
+
   }
 
   ${({ theme, removeBg }) => css`
@@ -67,11 +67,12 @@ const GlobalStyles: GlobalStyleComponent<
 
     body {
       font-family: ${theme.font.family};
-      font-size: ${theme.font.sizes.medium}
-        ${!removeBg &&
-        css`
-          background-color: ${theme.colors.mainBg};
-        `};
+      font-size: ${theme.font.sizes.medium};
+      ${!removeBg &&
+      css`
+        background-color: ${theme.colors.mainBg};
+      `}
+
     }
   `}
 
