@@ -48,7 +48,7 @@ const Home = ({
         Most Popular
       </Heading>
       <Highlight {...mostPopularHighlight} />
-      <GameCardSlider items={newGames} />
+      <GameCardSlider items={mostPopularGames} />
     </Container>
 
     <Container>
@@ -56,17 +56,17 @@ const Home = ({
         Upcoming
       </Heading>
 
-      <GameCardSlider items={newGames} />
-      <Highlight {...mostPopularHighlight} />
-      <GameCardSlider items={newGames} />
+      <GameCardSlider items={upcomingGames} />
+      <Highlight {...upcomingHighlight} />
+      <GameCardSlider items={upcomingMoreGames} />
     </Container>
 
     <Container>
       <Heading lineLeft lineColor="secondary">
         Free Games
       </Heading>
-      <Highlight {...mostPopularHighlight} />
-      <GameCardSlider items={newGames} />
+      <Highlight {...freeHighlight} />
+      <GameCardSlider items={freeGames} />
     </Container>
 
     <Container>

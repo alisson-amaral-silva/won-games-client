@@ -40,7 +40,7 @@ const settings: SliderSettings = {
     }
   ],
   nextArrow: <ArrowRight aria-label="next games" />,
-  prevArrow: <ArrowRight aria-label="previous games" />
+  prevArrow: <ArrowLeft aria-label="previous games" />
 }
 
 export type GameCardSliderProps = {
