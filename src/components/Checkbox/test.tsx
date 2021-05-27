@@ -2,6 +2,7 @@ import { screen, waitFor } from '@testing-library/react'
 import { renderWithTheme } from 'utils/tests/helper'
 import userEvent from '@testing-library/user-event'
 import Checkbox from '.'
+import theme from 'styles/theme'
 
 describe('<Checkbox  />', () => {
   it('should render the heading', () => {
@@ -43,6 +44,14 @@ describe('<Checkbox  />', () => {
       expect(onCheck).toHaveBeenCalledTimes(1)
     })
     expect(onCheck).toHaveBeenCalledWith(false)
+  })
+
+  it('should render with label (black)', () => {
+    renderWithTheme(<Checkbox label="Radio" labelColor="black" />)
+
+    const label = screen.getByText('Radio')
+    expect(label).toBeInTheDocument()
+    expect(label).toHaveStyle({ color: theme.colors.black })
   })
 
   it('should be accessible with tab', async () => {
