@@ -11,13 +11,15 @@ const props = {
   buttonLabel: 'Buy now',
   buttonLink: '/games/defy-death',
   ribbon: 'My Ribbon',
-  ribbonSize:'normal',
-  ribbonColor:'secondary'
+  ribbonSize: 'normal',
+  ribbonColor: 'secondary'
 }
 
 describe('<Banner  />', () => {
   it('should render the correctly', () => {
-    renderWithTheme(<Banner {...props}  ribbonSize='small' ribbonColor='secondary'/>)
+    renderWithTheme(
+      <Banner {...props} ribbonSize="small" ribbonColor="secondary" />
+    )
 
     expect(
       screen.getByRole('heading', { name: /Defy death/i })
@@ -31,11 +33,18 @@ describe('<Banner  />', () => {
   })
 
   it('should render a Ribbon', () => {
-    renderWithTheme(<Banner {...props} ribbon='My Ribbon' ribbonSize='small' ribbonColor='secondary' />);
-    const ribbon = screen.getByText(/My ribbon/i);
+    renderWithTheme(
+      <Banner
+        {...props}
+        ribbon="My Ribbon"
+        ribbonSize="small"
+        ribbonColor="secondary"
+      />
+    )
+    const ribbon = screen.getByText(/My ribbon/i)
 
-    expect(ribbon).toBeInTheDocument();
-    expect(ribbon).toHaveStyle({backgroundColor:'#3cd3c1'});
-    expect(ribbon).toHaveStyle({height:'2.6rem', fontSize:'1.2rem'});
+    expect(ribbon).toBeInTheDocument()
+    expect(ribbon).toHaveStyle({ backgroundColor: '#3cd3c1' })
+    expect(ribbon).toHaveStyle({ height: '2.6rem', fontSize: '1.2rem' })
   })
 })

@@ -1,6 +1,6 @@
 import styled, { css, DefaultTheme } from 'styled-components'
 import { ButtonProps } from '.'
-import {darken} from 'polished'
+import { darken } from 'polished'
 
 type WrapperProps = { hasIcon: boolean } & Pick<
   ButtonProps,
@@ -38,8 +38,8 @@ const wrapperModifiers = {
     background: none;
     color: ${theme.colors.primary};
 
-    &:hover{
-      color: ${darken(0.1, theme.colors.primary)}
+    &:hover {
+      color: ${darken(0.1, theme.colors.primary)};
     }
   `
 }
@@ -58,7 +58,9 @@ export const Wrapper = styled.button<WrapperProps>`
     text-decoration: none;
 
     &:hover {
-      background: ${minimal ? 'none' : `linear-gradient(180deg, #e35565 0%, #d958a6 50%)`};
+      background: ${minimal
+        ? 'none'
+        : `linear-gradient(180deg, #e35565 0%, #d958a6 50%)`};
     }
 
     ${!!size && wrapperModifiers[size](theme)};

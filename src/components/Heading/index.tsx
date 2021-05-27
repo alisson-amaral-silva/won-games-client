@@ -1,6 +1,6 @@
 import * as S from './styles'
 
-export type LineColors ='primary' | 'secondary'
+export type LineColors = 'primary' | 'secondary'
 
 export type HeadingProps = {
   children: React.ReactNode

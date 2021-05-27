@@ -1,5 +1,5 @@
 import { Meta, Story } from '@storybook/react/types-6-0'
-import Logo, {LogoProps} from '.'
+import Logo, { LogoProps } from '.'
 
 export default {
   title: 'Logo',

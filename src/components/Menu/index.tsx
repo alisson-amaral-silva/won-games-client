@@ -16,8 +16,7 @@ const Menu = ({ username }: MenuProps) => {
 
   return (
     <S.Wrapper>
-
-       <MediaMatch lessThan="medium">
+      <MediaMatch lessThan="medium">
         <S.IconWrapper onClick={() => setIsOpen(true)}>
           <MenuIcon aria-label="Open Menu" />
         </S.IconWrapper>

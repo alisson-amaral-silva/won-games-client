@@ -6,7 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint src --max-warnings=0",
+    "lint": "eslint src --max-warnings=3",
     "typecheck": "tsc --project tsconfig.json --noEmit",
     "test": "jest",
     "test:watch": "yarn test --watch",
@@ -28,6 +28,7 @@
   },
   "dependencies": {
     "@storybook/cli": "^6.1.17",
+    "@testing-library/user-event": "^13.1.9",
     "@types/react-slick": "^0.23.4",
     "next": "10.0.6",
     "next-pwa": "^5.0.5",

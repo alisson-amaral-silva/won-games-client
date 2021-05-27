@@ -39,7 +39,7 @@ const wrapperModifiers = {
 
 export const Wrapper = styled.div<Omit<RibbonProps, 'children'>>`
   ${({ theme, color, size }) => css`
-  position: absolute;
+    position: absolute;
     top: ${theme.spacings.xsmall};
     display: flex;
     align-items: center;

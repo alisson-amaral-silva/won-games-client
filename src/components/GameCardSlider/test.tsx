@@ -45,7 +45,6 @@ describe('<GameCardSlider  />', () => {
   it('should render the heading', () => {
     const { container } = renderWithTheme(<GameCardSlider items={items} />)
     expect(container.querySelectorAll('.slick-active')).toHaveLength(4)
-
   })
 
   it('should render white arrows if color passed', () => {
@@ -58,5 +57,4 @@ describe('<GameCardSlider  />', () => {
       color: '#FAFAFA'
     })
   })
-
 })

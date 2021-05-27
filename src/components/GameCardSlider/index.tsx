@@ -2,10 +2,10 @@ import { ArrowBackIos as ArrowLeft } from '@styled-icons/material-outlined/Arrow
 import { ArrowForwardIos as ArrowRight } from '@styled-icons/material-outlined/ArrowForwardIos'
 import * as S from './styles'
 import Slider, { SliderSettings } from '../Slider'
-import GameCard,{ GameCardProps } from '../GameCard'
+import GameCard, { GameCardProps } from '../GameCard'
 
 const settings: SliderSettings = {
-  arrows:true,
+  arrows: true,
   slidesToShow: 4,
   infinite: false,
   lazyLoad: 'ondemand',

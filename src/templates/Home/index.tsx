@@ -27,9 +27,7 @@ const Home = ({
   mostPopularHighlight,
   upcomingGames,
   upcomingHighlight,
-  upcomingMoreGames,
-  freeGames,
-  freeHighlight
+  upcomingMoreGames
 }: HomeTemplateProps) => (
   <section>
     <Container>

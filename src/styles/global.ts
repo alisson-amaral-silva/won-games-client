@@ -72,7 +72,6 @@ const GlobalStyles: GlobalStyleComponent<
       css`
         background-color: ${theme.colors.mainBg};
       `}
-
     }
   `}
 

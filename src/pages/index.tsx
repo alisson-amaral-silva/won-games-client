@@ -7,28 +7,26 @@ export default function Index(props: HomeTemplateProps) {
   return <Home {...props} />
 }
 
-  // Static => gerar estático em build time
-export function getStaticProps(){
+// Static => gerar estático em build time
+export function getStaticProps() {
   // faz lógica
   // pode ser buscar dados de API
   // fazer calculo| leitura de context
 
-
   // retorno dos dados
   return {
-    props:{
+    props: {
       banners: bannerMock,
-      newGames:gamesMock,
-      mostPopularHighlight:highlightMock,
-      mostPopularGames:gamesMock,
-      upcomingGames:gamesMock,
-      upcomingHighlight:highlightMock,
-      upcomingMoreGames:gamesMock,
-      freeGames:gamesMock,
-      freeHighlight:highlightMock
+      newGames: gamesMock,
+      mostPopularHighlight: highlightMock,
+      mostPopularGames: gamesMock,
+      upcomingGames: gamesMock,
+      upcomingHighlight: highlightMock,
+      upcomingMoreGames: gamesMock,
+      freeGames: gamesMock,
+      freeHighlight: highlightMock
     }
   }
-
 }
 
 //ATENÇÃO:

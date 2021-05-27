@@ -50,6 +50,5 @@ describe('<Home />', () => {
     expect(
       screen.getByRole('heading', { name: /Upcomming/i })
     ).toBeInTheDocument()
-
   })
 })
