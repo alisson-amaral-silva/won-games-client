@@ -4,6 +4,12 @@ import Checkbox, { CheckboxProps } from '.'
 export default {
   title: 'Checkbox',
   component: Checkbox,
+  parameters: {
+    layout: 'fullscreen',
+    backgrounds: {
+      default: 'won-dark'
+    }
+  },
   argTypes: {
     onCheck: { action: 'checked' }
   }
