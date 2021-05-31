@@ -1,25 +1,39 @@
 import { screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
+import { EmailOutline } from '@styled-icons/evaicons-outline/EmailOutline'
 
 import { renderWithTheme } from 'utils/tests/helper'
 
 import TextField from '.'
 
 describe('<TextField />', () => {
-  it('Renders with Label', () => {
-    renderWithTheme(<TextField label="Label" labelFor="Field" id="Field" />)
+  it('Renders with Label and icon', () => {
+    renderWithTheme(
+      <TextField
+        icon={<EmailOutline data-testid="icon" />}
+        label="Label"
+        labelFor="Field"
+        id="Field"
+      />
+    )
 
     expect(screen.getByLabelText('Label')).toBeInTheDocument()
+    expect(screen.getByTestId('icon')).toBeInTheDocument()
   })
 
   it('Renders without Label', () => {
-    renderWithTheme(<TextField />)
+    renderWithTheme(<TextField icon={<EmailOutline data-testid="icon" />} />)
 
     expect(screen.queryByLabelText('Label')).not.toBeInTheDocument()
   })
 
   it('Renders with placeholder', () => {
-    renderWithTheme(<TextField placeholder="hey you" />)
+    renderWithTheme(
+      <TextField
+        icon={<EmailOutline data-testid="icon" />}
+        placeholder="hey you"
+      />
+    )
 
     expect(screen.getByPlaceholderText('hey you')).toBeInTheDocument()
   })
@@ -28,6 +42,7 @@ describe('<TextField />', () => {
     const onInput = jest.fn()
     renderWithTheme(
       <TextField
+        icon={<EmailOutline data-testid="icon" />}
         onInput={onInput}
         label="TextField"
         labelFor="TextField"
@@ -48,7 +63,12 @@ describe('<TextField />', () => {
 
   it('Is accessible by tab', () => {
     renderWithTheme(
-      <TextField label="TextField" labelFor="TextField" id="TextField" />
+      <TextField
+        icon={<EmailOutline data-testid="icon" />}
+        label="TextField"
+        labelFor="TextField"
+        id="TextField"
+      />
     )
 
     const input = screen.getByLabelText('TextField')
@@ -56,5 +76,19 @@ describe('<TextField />', () => {
 
     userEvent.tab()
     expect(input).toHaveFocus()
+  })
+
+  it('should render an icon on the right side', () => {
+    renderWithTheme(
+      <TextField
+        icon={<EmailOutline data-testid="icon" />}
+        label="TextField"
+        labelFor="TextField"
+        id="TextField"
+        iconPosition="right"
+      />
+    )
+
+    expect(screen.getByTestId('icon').parentElement).toHaveStyle({ order: 1 })
   })
 })

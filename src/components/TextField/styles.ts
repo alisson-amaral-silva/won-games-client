@@ -1,4 +1,5 @@
-import styled, { css } from 'styled-components'
+import styled, { css, DefaultTheme } from 'styled-components'
+import { TextFieldProps } from '.'
 
 export const InputWrapper = styled.div`
   ${({ theme }) => css`
@@ -14,12 +15,26 @@ export const InputWrapper = styled.div`
   `}
 `
 
-export const Input = styled.input`
-  ${({ theme }) => css`
+export const Icon = styled.div<Pick<TextFieldProps, 'iconPosition'>>`
+  ${({ theme, iconPosition }) => css`
+    color: ${theme.colors.gray};
+    width: 2.5rem;
+    display: flex;
+    //mudando a posição do icone da direita para a esquerda dependendo do parametro
+    order: ${iconPosition === 'right' ? 1 : 0};
+    & > svg {
+      width: 100%;
+    }
+  `}
+`
+
+export const Input = styled.input<Pick<TextFieldProps, 'iconPosition'>>`
+  ${({ theme, iconPosition }) => css`
     color: ${theme.colors.black};
     font-family: ${theme.font.family};
     font-size: ${theme.font.sizes.medium};
     padding: ${theme.spacings.xxsmall} 0;
+    padding-${iconPosition}: ${theme.spacings.xsmall};
     background: transparent;
     border: 0;
     outline: none;
