@@ -91,4 +91,48 @@ describe('<TextField />', () => {
 
     expect(screen.getByTestId('icon').parentElement).toHaveStyle({ order: 1 })
   })
+
+  it('should disable the textfield when disabled', async () => {
+    const onInput = jest.fn()
+    renderWithTheme(
+      <TextField
+        icon={<EmailOutline data-testid="icon" />}
+        label="TextField"
+        labelFor="TextField"
+        onInput={onInput}
+        id="TextField"
+        iconPosition="right"
+        disabledInput={true}
+      />
+    )
+
+    const input = screen.getByLabelText('TextField')
+    expect(input).toBeDisabled()
+
+    const text = 'This is my new text'
+    userEvent.type(input, text)
+
+    await waitFor(() => {
+      expect(input).not.toHaveValue(text)
+    })
+    expect(onInput).not.toHaveBeenCalled()
+  })
+
+  it('Is not accessible by tab when disabled', () => {
+    renderWithTheme(
+      <TextField
+        icon={<EmailOutline data-testid="icon" />}
+        label="TextField"
+        labelFor="TextField"
+        id="TextField"
+        disabledInput={true}
+      />
+    )
+
+    const input = screen.getByLabelText('TextField')
+    expect(document.body).toHaveFocus()
+
+    userEvent.tab()
+    expect(input).not.toHaveFocus()
+  })
 })

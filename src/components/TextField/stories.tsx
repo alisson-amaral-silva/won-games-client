@@ -11,7 +11,8 @@ export default {
     id: 'Email',
     initialValue: '',
     placeholder: 'john.cage@gmail.com',
-    iconPosition: 'left'
+    iconPosition: 'left',
+    disabledInput: false
   },
   argTypes: {
     onInput: { action: 'changed' },

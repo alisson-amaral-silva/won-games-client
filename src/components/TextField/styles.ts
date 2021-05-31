@@ -30,7 +30,7 @@ export const Icon = styled.div<Pick<TextFieldProps, 'iconPosition'>>`
 
 export const Input = styled.input<Pick<TextFieldProps, 'iconPosition'>>`
   ${({ theme, iconPosition }) => css`
-    color: ${theme.colors.black};
+    color:  ${theme.colors.black};
     font-family: ${theme.font.family};
     font-size: ${theme.font.sizes.medium};
     padding: ${theme.spacings.xxsmall} 0;
@@ -50,4 +50,24 @@ export const Label = styled.label`
   `}
 `
 
-export const Wrapper = styled.div``
+const wrapperModifiers = {
+  disabled: (theme: DefaultTheme) => css`
+    //definindo que todos estes componentes irão ter as mesmas configs
+    ${Label},
+    ${Input},
+    ${Icon} {
+      cursor: not-allowed;
+      color: ${theme.colors.gray};
+
+      &::placeholder {
+        color: currentColor;
+      }
+    }
+  `
+}
+
+export const Wrapper = styled.div<Pick<TextFieldProps, 'disabledInput'>>`
+  ${({ theme, disabledInput }) => css`
+    ${disabledInput && wrapperModifiers.disabled(theme)}
+  `}
+`
