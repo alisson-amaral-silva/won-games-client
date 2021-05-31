@@ -50,6 +50,13 @@ export const Label = styled.label`
   `}
 `
 
+export const ErrorMessage = styled.p`
+  ${({ theme }) => css`
+    font-size: ${theme.font.sizes.xsmall};
+    color: ${theme.colors.red};
+  `}
+`
+
 const wrapperModifiers = {
   disabled: (theme: DefaultTheme) => css`
     //definindo que todos estes componentes irão ter as mesmas configs
@@ -63,11 +70,23 @@ const wrapperModifiers = {
         color: currentColor;
       }
     }
+  `,
+  errorMessage: (theme: DefaultTheme) => css`
+    ${InputWrapper} {
+      border-color: ${theme.colors.red};
+    }
+    ${Icon},
+    ${Label} {
+      color: ${theme.colors.red};
+    }
   `
 }
 
-export const Wrapper = styled.div<Pick<TextFieldProps, 'disabledInput'>>`
-  ${({ theme, disabledInput }) => css`
-    ${disabledInput && wrapperModifiers.disabled(theme)}
+export const Wrapper = styled.div<
+  Pick<TextFieldProps, 'disabledInput'> & { errorMessage?: boolean }
+>`
+  ${({ theme, disabledInput, errorMessage }) => css`
+    ${!!errorMessage && wrapperModifiers.errorMessage(theme)};
+    ${disabledInput && wrapperModifiers.disabled(theme)};
   `}
 `

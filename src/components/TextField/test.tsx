@@ -135,4 +135,17 @@ describe('<TextField />', () => {
     userEvent.tab()
     expect(input).not.toHaveFocus()
   })
+
+  it('Renders with error', () => {
+    renderWithTheme(
+      <TextField
+        icon={<EmailOutline data-testid="icon" />}
+        label="TextField"
+        labelFor="TextField"
+        errorMessage="Error message"
+      />
+    )
+
+    expect(screen.getByText('Error message')).toBeInTheDocument()
+  })
 })
