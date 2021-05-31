@@ -1,6 +1,6 @@
 import { screen } from '@testing-library/react'
-import { renderWithTheme } from 'utils/tests/helper'
 import 'jest-styled-components'
+import { renderWithTheme } from 'utils/tests/helper'
 import Heading from '.'
 
 describe('<Heading  />', () => {
@@ -80,6 +80,14 @@ describe('<Heading  />', () => {
     expect(heading).toHaveStyle({ 'border-left': '0.7rem solid #3CD3C1' })
     expect(heading).toHaveStyleRule('border-bottom', '0.5rem solid #3CD3C1', {
       modifier: '::after'
+    })
+  })
+
+  it('should render a heading with a huge size', () => {
+    renderWithTheme(<Heading size="huge">Won Games</Heading>)
+
+    expect(screen.getByRole('heading', { name: /won games/i })).toHaveStyle({
+      'font-size': '5.2rem'
     })
   })
 })
