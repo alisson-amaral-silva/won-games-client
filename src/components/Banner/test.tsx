@@ -2,8 +2,6 @@ import { screen } from '@testing-library/react'
 import { renderWithTheme } from 'utils/tests/helper'
 import Banner from '.'
 
-import Ribbon from '../Ribbon'
-
 const props = {
   img: 'https://source.unsplash.com/user/willianjusten/1042x580',
   title: 'Defy death',
