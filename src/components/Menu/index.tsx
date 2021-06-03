@@ -7,6 +7,7 @@ import Logo from 'components/Logo'
 import MediaMatch from 'components/MediaMatch'
 import { useState } from 'react'
 import Button from 'components/Button'
+import Link from 'next/link'
 
 export type MenuProps = {
   username?: string
@@ -21,9 +22,12 @@ const Menu = ({ username }: MenuProps) => {
           <MenuIcon aria-label="Open Menu" />
         </S.IconWrapper>
       </MediaMatch>
-
       <S.LogoWrapper>
-        <Logo hideOnMobile />
+        <Link href="/">
+          <a>
+            <Logo hideOnMobile />
+          </a>
+        </Link>
       </S.LogoWrapper>
 
       <MediaMatch greaterThan="medium">
@@ -42,7 +46,9 @@ const Menu = ({ username }: MenuProps) => {
         </S.IconWrapper>
         {!username && (
           <MediaMatch greaterThan="medium">
-            <Button>Sign in</Button>
+            <Link href="/sign-in" passHref>
+              <Button as="a">Sign in</Button>
+            </Link>
           </MediaMatch>
         )}
       </S.MenuGroup>
@@ -63,13 +69,15 @@ const Menu = ({ username }: MenuProps) => {
 
         {!username && (
           <S.RegisterBox>
-            <Button fullWidth size="large">
-              Log in now
-            </Button>
+            <Link href="/sign-in" passHref>
+              <Button fullWidth size="large" as="a">
+                Sign-in
+              </Button>
+            </Link>
             <span>or</span>
-            <S.CreateAccount href="#" title="Sign Up">
-              Sign Up
-            </S.CreateAccount>
+            <Link href="/sign-up" passHref>
+              <S.CreateAccount title="Sign Up">Sign Up</S.CreateAccount>
+            </Link>
           </S.RegisterBox>
         )}
       </S.MenuFull>

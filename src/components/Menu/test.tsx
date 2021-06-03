@@ -35,7 +35,7 @@ describe('<Menu  />', () => {
 
   it('should show register box when logged out', () => {
     renderWithTheme(<Menu />)
-    expect(screen.getByText(/Log in now/i)).toBeInTheDocument()
+    expect(screen.getByText(/sign in/i)).toBeInTheDocument()
     expect(screen.getByText(/Sign Up/i)).toBeInTheDocument()
   })
 
@@ -43,7 +43,7 @@ describe('<Menu  />', () => {
     renderWithTheme(<Menu username="Alisson" />)
 
     //para procuar algo que possa nãp estar na tela = query otherwise getByFodac
-    expect(screen.queryByText(/Log in now/i)).not.toBeInTheDocument()
+    expect(screen.queryByText(/sign in/i)).not.toBeInTheDocument()
     expect(screen.queryByText(/Sign Up/i)).not.toBeInTheDocument()
 
     expect(screen.getByText(/My account/i)).toBeInTheDocument()
