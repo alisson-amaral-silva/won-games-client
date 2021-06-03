@@ -36,9 +36,9 @@ describe('<Home />', () => {
     // banner
     expect(screen.getAllByText(/defy death 1/i)).toHaveLength(1)
     // card game ( 5 sections com 4 cards cada = 5x4 = 20)
-    expect(screen.getAllByText(/population zero/i)).toHaveLength(4)
+    expect(screen.getAllByText(/population zero/i)).toHaveLength(5)
     // highlight
-    expect(screen.getAllByText(/read dead is back!/i)).toHaveLength(2)
+    expect(screen.getAllByText(/read dead is back!/i)).toHaveLength(3)
   })
 
   it('should render sections', () => {
@@ -48,7 +48,7 @@ describe('<Home />', () => {
       screen.getByRole('heading', { name: /Most Popular/i })
     ).toBeInTheDocument()
     expect(
-      screen.getByRole('heading', { name: /Upcomming/i })
+      screen.getByRole('heading', { name: /Upcoming/i })
     ).toBeInTheDocument()
   })
 })
