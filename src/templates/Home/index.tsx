@@ -20,6 +20,7 @@ export type HomeTemplateProps = {
   freeGames: GameCardProps[]
   freeHighlight: HighlightProps
 }
+
 const Home = ({
   banners,
   newGames,
@@ -46,22 +47,24 @@ const Home = ({
       </Container>
     </S.SectionNews>
 
-    <S.SectionMostPopular>
-      <Heading lineLeft lineColor="secondary">
-        Most Popular
-      </Heading>
-      <Highlight {...mostPopularHighlight} />
-      <GameCardSlider items={mostPopularGames} />
-    </S.SectionMostPopular>
+    <Container>
+      <S.SectionMostPopular>
+        <Heading lineLeft lineColor="secondary">
+          Most Popular
+        </Heading>
+        <Highlight {...mostPopularHighlight} />
+        <GameCardSlider items={mostPopularGames} />
+      </S.SectionMostPopular>
 
-    <S.SectionUpcoming>
-      <Heading lineLeft lineColor="secondary">
-        Upcomming
-      </Heading>
-      <GameCardSlider items={upcomingGames} />
-      <Highlight {...upcomingHighlight} />
-      <GameCardSlider items={upcomingMoreGames} />
-    </S.SectionUpcoming>
+      <S.SectionUpcoming>
+        <Heading lineLeft lineColor="secondary">
+          Upcomming
+        </Heading>
+        <GameCardSlider items={upcomingGames} />
+        <Highlight {...upcomingHighlight} />
+        <GameCardSlider items={upcomingMoreGames} />
+      </S.SectionUpcoming>
+    </Container>
 
     <S.SectionFooter>
       <Container>
