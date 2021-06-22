@@ -5,7 +5,9 @@ import GameDetails, { GameDetailsProps } from '.'
 const props: GameDetailsProps = {
   developer: 'developer',
   platforms: ['mac', 'linux', 'windows'],
-  releaseDate: new Date().toString()
+  releaseDate: new Date().toString(),
+  rating: 'BR0',
+  genres: ['Role-playing', 'Adventure']
 }
 
 describe('<GameDetails  />', () => {
@@ -53,5 +55,23 @@ describe('<GameDetails  />', () => {
         }).format(new Date())
       )
     ).toBeInTheDocument()
+  })
+
+  it('should render the free rating when BR0', () => {
+    renderWithTheme(<GameDetails {...props} />)
+
+    expect(screen.getByText(/free/i)).toBeInTheDocument()
+  })
+
+  it('should render the +18 rating when BR18', () => {
+    renderWithTheme(<GameDetails {...props} rating="BR18" />)
+
+    expect(screen.getByText(/18\+/i)).toBeInTheDocument()
+  })
+
+  it('should render genres', () => {
+    renderWithTheme(<GameDetails {...props} />)
+
+    expect(screen.getByText(/role-playing \/ adventure/i)).toBeInTheDocument()
   })
 })
