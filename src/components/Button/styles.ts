@@ -7,7 +7,7 @@ export type WrapperProps = { hasIcon: boolean } & Pick<
   'size' | 'fullWidth' | 'minimal'
 >
 
-const wrapperModifiers = {
+export const wrapperModifiers = {
   small: (theme: DefaultTheme) => css`
     height: 3rem;
     font-size: ${theme.font.sizes.xsmall};
