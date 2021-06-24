@@ -1,6 +1,6 @@
 import { ArrowBackIos as ArrowLeft } from '@styled-icons/material-outlined/ArrowBackIos'
 import { ArrowForwardIos as ArrowRight } from '@styled-icons/material-outlined/ArrowForwardIos'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Slider, { SliderSettings } from '../Slider'
 import * as S from './styles'
 import { Close } from '@styled-icons/material-outlined/Close'
@@ -51,6 +51,16 @@ export type GallerySliderProps = {
 
 const Gallery = ({ items }: GallerySliderProps) => {
   const [isOpen, setIsOpen] = useState(false)
+
+  useEffect(() => {
+    const handleKeyUp = ({ key }: KeyboardEvent) => {
+      key === 'Escape' && setIsOpen(false)
+    }
+
+    window.addEventListener('keyup', handleKeyUp)
+
+    return () => window.removeEventListener('keyup', handleKeyUp)
+  }, [])
 
   return (
     <S.Wrapper>
