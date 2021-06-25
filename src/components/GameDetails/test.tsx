@@ -4,6 +4,7 @@ import GameDetails, { GameDetailsProps } from '.'
 
 const props: GameDetailsProps = {
   developer: 'developer',
+  publisher: 'Walkabout',
   platforms: ['mac', 'linux', 'windows'],
   releaseDate: new Date().toString(),
   rating: 'BR0',
@@ -33,6 +34,16 @@ describe('<GameDetails  />', () => {
     expect(screen.getByRole('heading', { name: /rating/i })).toBeInTheDocument()
 
     expect(screen.getByRole('heading', { name: /genres/i })).toBeInTheDocument()
+
+    expect(
+      screen.getByText(
+        new Intl.DateTimeFormat('en-us', {
+          day: 'numeric',
+          month: 'short',
+          year: 'numeric'
+        }).format(new Date())
+      )
+    ).toBeInTheDocument()
   })
 
   it('should render platform icons', () => {
@@ -61,6 +72,12 @@ describe('<GameDetails  />', () => {
     renderWithTheme(<GameDetails {...props} />)
 
     expect(screen.getByText(/free/i)).toBeInTheDocument()
+  })
+
+  it('should render the publisher', () => {
+    renderWithTheme(<GameDetails {...props} />)
+
+    expect(screen.getByText(/walkabout/i)).toBeInTheDocument()
   })
 
   it('should render the +18 rating when BR18', () => {
