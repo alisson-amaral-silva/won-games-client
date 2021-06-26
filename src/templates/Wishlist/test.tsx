@@ -5,6 +5,7 @@ import gamesMock from 'components/GameCardSlider/mock'
 import highlightMock from 'components/Highlight/mock'
 
 const props: WishlistTemplateProps = {
+  games: gamesMock,
   recommendedHighlight: highlightMock,
   recommendedGames: gamesMock
 }
@@ -24,9 +25,10 @@ jest.mock('components/Showcase', () => ({
 }))
 
 describe('<Wishlist  />', () => {
-  it('should render the heading', () => {
+  it('should render the Whishlist Component', () => {
     renderWithTheme(<Wishlist {...props} />)
     expect(screen.getByTestId('Mock Showcase')).toBeInTheDocument()
     expect(screen.getByTestId('Mock Menu')).toBeInTheDocument()
+    expect(screen.getAllByText(/population zero/i)).toHaveLength(6)
   })
 })
