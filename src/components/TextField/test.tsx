@@ -12,8 +12,7 @@ describe('<TextField />', () => {
       <TextField
         icon={<EmailOutline data-testid="icon" />}
         label="Label"
-        labelFor="Field"
-        id="Field"
+        name="Label"
       />
     )
 
@@ -45,8 +44,7 @@ describe('<TextField />', () => {
         icon={<EmailOutline data-testid="icon" />}
         onInput={onInput}
         label="TextField"
-        labelFor="TextField"
-        id="TextField"
+        name="TextField"
       />
     )
 
@@ -66,8 +64,7 @@ describe('<TextField />', () => {
       <TextField
         icon={<EmailOutline data-testid="icon" />}
         label="TextField"
-        labelFor="TextField"
-        id="TextField"
+        name="TextField"
       />
     )
 
@@ -83,8 +80,7 @@ describe('<TextField />', () => {
       <TextField
         icon={<EmailOutline data-testid="icon" />}
         label="TextField"
-        labelFor="TextField"
-        id="TextField"
+        name="TextField"
         iconPosition="right"
       />
     )
@@ -98,9 +94,8 @@ describe('<TextField />', () => {
       <TextField
         icon={<EmailOutline data-testid="icon" />}
         label="TextField"
-        labelFor="TextField"
+        name="TextField"
         onInput={onInput}
-        id="TextField"
         iconPosition="right"
         disabledInput={true}
       />
@@ -123,8 +118,7 @@ describe('<TextField />', () => {
       <TextField
         icon={<EmailOutline data-testid="icon" />}
         label="TextField"
-        labelFor="TextField"
-        id="TextField"
+        name="TextField"
         disabledInput={true}
       />
     )
@@ -141,7 +135,7 @@ describe('<TextField />', () => {
       <TextField
         icon={<EmailOutline data-testid="icon" />}
         label="TextField"
-        labelFor="TextField"
+        name="TextField"
         errorMessage="Error message"
       />
     )
