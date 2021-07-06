@@ -1,34 +1,27 @@
+import { InputHTMLAttributes } from 'react'
+
 import * as S from './styles'
-import { InputHTMLAttributes, useState } from 'react'
+
+type RadioValue = string | ReadonlyArray<string> | number
 
 export type RadioProps = {
-  onCheck?: (status: boolean) => void
+  onCheck?: (value?: RadioValue) => void
   label?: string
-  labelFor?: string
   labelColor?: 'white' | 'black'
-  isChecked?: boolean
-  value?: string | ReadonlyArray<string> | number
+  labelFor?: string
+  value?: RadioValue
 } & InputHTMLAttributes<HTMLInputElement>
 
 const Radio = ({
-  onCheck,
   label,
-  labelFor = '',
+  onCheck,
   labelColor = 'white',
-  isChecked = false,
+  labelFor = '',
   value,
   ...props
 }: RadioProps) => {
-  // controlled component (state)
-  const [checked, setChecked] = useState(isChecked)
-
   const onChange = () => {
-    const status = !checked // true => false => true
-    setChecked(status)
-
-    if (onCheck) {
-      onCheck(status)
-    }
+    !!onCheck && onCheck(value)
   }
 
   return (
@@ -36,13 +29,12 @@ const Radio = ({
       <S.Input
         id={labelFor}
         type="radio"
-        onChange={onChange}
-        checked={checked}
         value={value}
+        onChange={onChange}
         {...props}
       />
       {!!label && (
-        <S.Label htmlFor={labelFor} labelColor={labelColor}>
+        <S.Label labelColor={labelColor} htmlFor={labelFor}>
           {label}
         </S.Label>
       )}

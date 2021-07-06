@@ -38,7 +38,7 @@ describe('<Radio  />', () => {
     await waitFor(() => {
       expect(onCheck).toHaveBeenCalledTimes(1)
     })
-    expect(onCheck).toHaveBeenCalledWith(true)
+    expect(onCheck).toHaveBeenCalledWith('anyValue')
   })
 
   it('should render with label (black)', () => {
