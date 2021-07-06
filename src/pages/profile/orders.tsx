@@ -1,11 +1,21 @@
+import OrdersList, { OrdersListProps } from 'components/OrdersList'
+import ordersMock from 'components/OrdersList/mock'
+import React from 'react'
 import Profile from 'templates/Profile'
-import cartListMock from 'components/CartList/mock'
-import CartList from 'components/CartList'
 
-export default function Orders() {
+export default function Cards({ items }: OrdersListProps) {
   return (
     <Profile>
-      <CartList items={cartListMock} total="R$ 330,00" />
+      <OrdersList items={items} />
     </Profile>
   )
+}
+
+// Cada vez que o usuario add ou remove as coisas ela não é estatica por isso o serverSideProps
+export async function getServerSideProps() {
+  return {
+    props: {
+      items: ordersMock
+    }
+  }
 }
