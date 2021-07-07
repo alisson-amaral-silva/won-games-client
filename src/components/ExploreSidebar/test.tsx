@@ -1,11 +1,13 @@
 import { screen } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
 import { renderWithTheme } from 'utils/tests/helper'
 import ExploreSidebar from '.'
 import items from './mock'
 
 describe('<ExploreSidebar  />', () => {
   it('should render the headings', () => {
-    renderWithTheme(<ExploreSidebar items={items} />)
+    const onFilter = jest.fn()
+    renderWithTheme(<ExploreSidebar items={items} onFilter={onFilter} />)
 
     expect(screen.getByRole('heading', { name: /price/i })).toBeInTheDocument()
     expect(
@@ -16,7 +18,8 @@ describe('<ExploreSidebar  />', () => {
   })
 
   it('should render the inputs', () => {
-    renderWithTheme(<ExploreSidebar items={items} />)
+    const onFilter = jest.fn()
+    renderWithTheme(<ExploreSidebar items={items} onFilter={onFilter} />)
 
     expect(
       screen.getByRole('checkbox', { name: /under \$50/i })
@@ -28,21 +31,38 @@ describe('<ExploreSidebar  />', () => {
   })
 
   it('should render filter button', () => {
-    renderWithTheme(<ExploreSidebar items={items} />)
+    const onFilter = jest.fn()
+    renderWithTheme(<ExploreSidebar items={items} onFilter={onFilter} />)
 
     expect(screen.getByRole('button', { name: /filter/i })).toBeInTheDocument()
   })
 
   it('should check initial values that are passed', () => {
+    const onFilter = jest.fn()
     renderWithTheme(
       <ExploreSidebar
         items={items}
         initialValues={{ windows: true, sort_by: 'low-to-high' }}
+        onFilter={onFilter}
       />
     )
 
     expect(screen.getByRole('checkbox', { name: /windows/i })).toBeChecked()
 
     expect(screen.getByRole('radio', { name: /low to high/i })).toBeChecked()
+  })
+
+  it('should return selected items in onFilter method', () => {
+    const onFilter = jest.fn()
+
+    renderWithTheme(
+      <ExploreSidebar
+        items={items}
+        initialValues={{ windows: true, sort_by: 'low-to-high' }}
+        onFilter={onFilter}
+      />
+    )
+    userEvent.click(screen.getByRole('button', { name: /filter/i }))
+    expect(onFilter).toBeCalledWith({ windows: true, sort_by: 'low-to-high' })
   })
 })

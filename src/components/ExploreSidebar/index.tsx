@@ -25,10 +25,19 @@ type Values = {
 export type ExploreSidebarProps = {
   items: ItemProps[]
   initialValues?: Values
+  onFilter: (values: Values) => void
 }
 
-const ExploreSidebar = ({ items, initialValues = {} }: ExploreSidebarProps) => {
+const ExploreSidebar = ({
+  items,
+  initialValues = {},
+  onFilter
+}: ExploreSidebarProps) => {
   const [values, setValues] = useState(initialValues)
+
+  const handleFilter = () => {
+    onFilter(values)
+  }
 
   return (
     <S.Wrapper>
@@ -61,7 +70,7 @@ const ExploreSidebar = ({ items, initialValues = {} }: ExploreSidebarProps) => {
             ))}
         </div>
       ))}
-      <Button fullWidth size="medium">
+      <Button fullWidth size="medium" onClick={handleFilter}>
         Filter
       </Button>
     </S.Wrapper>
