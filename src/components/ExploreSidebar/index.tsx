@@ -39,6 +39,12 @@ const ExploreSidebar = ({
     onFilter(values)
   }
 
+  const handleChange = (name: string, value: string | boolean) => {
+    //esse desconstructing na variavel "previousValues" significa que esta pegando os valores anteriores
+    //e atribuindo para o mesmo hook
+    setValues((previousValues) => ({ ...previousValues, [name]: value }))
+  }
+
   return (
     <S.Wrapper>
       {items.map((item) => (
@@ -46,6 +52,7 @@ const ExploreSidebar = ({
           <Heading lineBottom lineColor="secondary" size="small">
             {item.title}
           </Heading>
+
           {item.type === 'checkbox' &&
             item.fields.map((field) => (
               <Checkbox
@@ -54,8 +61,10 @@ const ExploreSidebar = ({
                 label={field.label}
                 labelFor={item.name}
                 isChecked={!!values[field.name]}
+                onCheck={(actualValue) => handleChange(field.name, actualValue)}
               />
             ))}
+
           {item.type === 'radio' &&
             item.fields.map((field) => (
               <Radio
@@ -66,6 +75,7 @@ const ExploreSidebar = ({
                 label={field.label}
                 labelFor={field.name}
                 defaultChecked={field.name === values[item.name]}
+                onChange={() => handleChange(item.name, field.name)}
               />
             ))}
         </div>
