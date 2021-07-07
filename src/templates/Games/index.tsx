@@ -12,26 +12,37 @@ export type GamesTemplateProps = {
   filterItems: ItemProps[]
 }
 
-const Games = ({ games, filterItems }: GamesTemplateProps) => (
-  <Base>
-    <h1>Explore games</h1>
-    <S.Main></S.Main>
-    <ExploreSidebar
-      items={filterItems}
-      onFilter={() => console.log('Shazam')}
-    />
-    <section>
-      <Grid>
-        {games?.map((item, index) => (
-          <GameCard key={`${item.title}-${index}`} {...item} />
-        ))}
-      </Grid>
-    </section>
-    <S.ShowMore role="button" onClick={() => console.log('show more')}>
-      <p>Show More</p>
-      <ArrowDown size={35} />
-    </S.ShowMore>
-  </Base>
-)
+const Games = ({ filterItems, games = [] }: GamesTemplateProps) => {
+  const handleFilter = () => {
+    return
+  }
+
+  const handleShowMore = () => {
+    return
+  }
+
+  return (
+    <Base>
+      <S.Main>
+        <ExploreSidebar items={filterItems} onFilter={handleFilter} />
+
+        <section>
+          <Grid>
+            {games.map((item, index) => (
+              <>
+                <GameCard key={`${item.title}-${index}`} {...item} />
+              </>
+            ))}
+          </Grid>
+
+          <S.ShowMore role="button" onClick={handleShowMore}>
+            <p>Show More</p>
+            <ArrowDown size={35} />
+          </S.ShowMore>
+        </section>
+      </S.Main>
+    </Base>
+  )
+}
 
 export default Games
