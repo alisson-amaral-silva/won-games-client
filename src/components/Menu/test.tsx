@@ -36,7 +36,7 @@ describe('<Menu  />', () => {
   it('should show register box when logged out', () => {
     renderWithTheme(<Menu />)
     expect(screen.getByText(/sign in/i)).toBeInTheDocument()
-    expect(screen.getByText(/Sign Up/i)).toBeInTheDocument()
+    expect(screen.getByText(/sign Up/i)).toBeInTheDocument()
   })
 
   it('should not show register box when logged out', () => {
@@ -44,9 +44,9 @@ describe('<Menu  />', () => {
 
     //para procuar algo que possa nãp estar na tela = query otherwise getByFodac
     expect(screen.queryByText(/sign in/i)).not.toBeInTheDocument()
-    expect(screen.queryByText(/Sign Up/i)).not.toBeInTheDocument()
+    expect(screen.queryByText(/sign Up/i)).not.toBeInTheDocument()
 
-    expect(screen.getByText(/My account/i)).toBeInTheDocument()
-    expect(screen.getByText(/Wishlist/i)).toBeInTheDocument()
+    expect(screen.getAllByText(/my profile/i)).toHaveLength(2)
+    expect(screen.getAllByText(/wishlist/i)).toHaveLength(2)
   })
 })
