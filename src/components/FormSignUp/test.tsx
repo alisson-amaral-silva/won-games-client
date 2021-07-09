@@ -4,7 +4,7 @@ import FormSignUp from '.'
 
 describe('<FormSignUp />', () => {
   it('should render the form', () => {
-    const { container } = renderWithTheme(<FormSignUp />)
+    renderWithTheme(<FormSignUp />)
 
     expect(screen.getByPlaceholderText(/name/i)).toBeInTheDocument()
     expect(screen.getByPlaceholderText(/email/i)).toBeInTheDocument()
