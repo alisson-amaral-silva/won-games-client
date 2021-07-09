@@ -24,7 +24,7 @@ const wrapperModifiers = {
 }
 
 export const Wrapper = styled.section<WrapperProps>`
-  ${({ theme, backgroundImage, alignment }) => css`
+  ${({ backgroundImage, alignment }) => css`
     position: relative;
     height: 23rem;
     display: grid;
