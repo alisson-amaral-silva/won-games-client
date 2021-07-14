@@ -1,14 +1,27 @@
-import Home, { HomeTemplateProps } from 'templates/Home'
+import { gql, useQuery } from '@apollo/client'
 import bannerMock from 'components/BannerSlider/mock'
-import highlightMock from 'components/Highlight/mock'
 import gamesMock from 'components/GameCardSlider/mock'
+import highlightMock from 'components/Highlight/mock'
+import Home, { HomeTemplateProps } from 'templates/Home'
 
 export default function Index(props: HomeTemplateProps) {
+  const { loading, error } = useQuery(gql`
+    query getGames {
+      games {
+        name
+      }
+    }
+  `)
+  if (loading) return <p>Loading...</p>
+  if (error) return <p>Loading...</p>
+
   return <Home {...props} />
 }
 
-// Static => gerar estático em build time
-export function getStaticProps() {
+// getStaticProps => gerar estático em build time
+// getServerSideProps => gera via ssr a cada request (nunca vai para o bundle do client)
+// getInitialProps => gera via ssr a cada request (vai para o client, gera via ssr, mas se tiver atualização do dado, ele faz hydrate do lado do lado do client depois do 1 request)
+export async function getServerSideProps() {
   // faz lógica
   // pode ser buscar dados de API
   // fazer calculo| leitura de context

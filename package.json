@@ -26,12 +26,14 @@
     ]
   },
   "dependencies": {
+    "@apollo/client": "^3.3.21",
     "@storybook/cli": "^6.1.17",
     "@styled-icons/boxicons-regular": "^10.34.0",
     "@styled-icons/boxicons-solid": "^10.34.0",
     "@styled-icons/fa-brands": "^10.34.0",
     "@testing-library/user-event": "^13.1.9",
     "@types/react-slick": "^0.23.4",
+    "graphql": "^15.5.1",
     "next": "10.0.6",
     "next-pwa": "^5.0.5",
     "polished": "^4.1.1",
