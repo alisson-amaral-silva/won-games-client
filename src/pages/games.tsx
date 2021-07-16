@@ -28,10 +28,7 @@ export async function getStaticProps() {
         img: game.cover
           ? `http://localhost:1337${game.cover.url}`
           : '/img/games/kingdom-Hearts-3-1.png',
-        price: new Intl.NumberFormat('pt-BR', {
-          style: 'currency',
-          currency: 'BRL'
-        }).format(game.price)
+        price: game.price
       })),
       filterItems: inputsMock
     }
