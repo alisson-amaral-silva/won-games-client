@@ -23,6 +23,7 @@ export async function getStaticProps() {
       revalidate: 60, // segura os dados por 60 segundos na tela por todas as req e dps de 60 sec da refresh na pagina com novos dados
       games: data.games.map((game) => ({
         title: game.name,
+        slug: game.slug,
         developer: game.developers[0].name,
         img: game.cover
           ? `http://localhost:1337${game.cover.url}`
