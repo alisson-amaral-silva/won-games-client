@@ -1,6 +1,6 @@
 export default function formatPrice(price: number | bigint): string {
-  return new Intl.NumberFormat('pt-BR', {
+  return new Intl.NumberFormat('en', {
     style: 'currency',
-    currency: 'BRL'
+    currency: 'USD'
   }).format(price)
 }
