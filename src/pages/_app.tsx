@@ -4,7 +4,10 @@ import Head from 'next/head'
 import { ThemeProvider } from 'styled-components'
 import GlobalStyles from 'styles/global'
 import theme from 'styles/theme'
+import { useApollo } from 'utils/apollo'
 function App({ Component, pageProps }: AppProps) {
+  const client = useApollo(pageProps.initialApolloState)
+
   return (
     <ApolloProvider client={client}>
       <ThemeProvider theme={theme}>
