@@ -3,7 +3,7 @@ import Logo from 'components/Logo'
 import * as S from './styles'
 import Link from 'next/link'
 
-type AuthProps = {
+export type AuthProps = {
   title: string
   children: React.ReactNode
 }

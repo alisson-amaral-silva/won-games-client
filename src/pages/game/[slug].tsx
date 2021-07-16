@@ -1,5 +1,4 @@
 import Game, { GameTemplateProps } from 'templates/Game'
-import galleryMock from 'components/Gallery/mock'
 import gamesMock from 'components/GameCardSlider/mock'
 import highlightMock from 'components/Highlight/mock'
 import { useRouter } from 'next/router'

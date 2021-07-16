@@ -10,7 +10,7 @@ import { GameDetailsProps } from 'components/GameDetails'
 
 const gameInfo = {
   title: 'Kingdom hearts 3',
-  price: '59.00',
+  price: 59,
   description:
     'KINGDOM HEARTS III tells the story of the power of friendship as Sora and his friends embark on a perilous adventure. Set in a vast array of Disney and Pixar worlds, KINGDOM HEARTS follows the journey of Sora, a young boy and unknowing heir to a spectacular power. Sora is joined by Donald Duck and Goofy to stop an evil force known as the Heartless from invading and overtaking the universe'
 }
