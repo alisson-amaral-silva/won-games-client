@@ -33,7 +33,6 @@ const Game = ({
   <Base>
     <S.Cover src={cover} role="image" aria-label="cover"></S.Cover>
     <S.Main>
-      <h1>Game</h1>
       <S.SectionGameInfo>
         <GameInfo {...gameInfo} />
       </S.SectionGameInfo>
