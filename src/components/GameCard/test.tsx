@@ -32,10 +32,10 @@ describe('<GameCard  />', () => {
   it('should render price in label', () => {
     renderWithTheme(<GameCard {...props} />)
 
-    const price = screen.getByText('R$ 235.00')
+    const price = screen.getAllByText('R$ 235.00')
 
-    expect(price).not.toHaveStyle({ textDecoration: 'line-through' })
-    expect(price).toHaveStyle({ backgroundColor: theme.colors.secondary })
+    expect(price[0]).not.toHaveStyle({ textDecoration: 'line-through' })
+    expect(price[0]).toHaveStyle({ backgroundColor: theme.colors.secondary })
   })
 
   it('should render a line-through in price when promotional', () => {
