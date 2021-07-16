@@ -1,7 +1,8 @@
-import Games, { GamesTemplateProps } from 'templates/Games'
 import inputsMock from 'components/ExploreSidebar/mock'
+import { GetGames, GetGamesVariables } from 'graphql/generated/GetGames'
+import { GET_GAMES } from 'graphql/queries/games'
+import Games, { GamesTemplateProps } from 'templates/Games'
 import { initializeApollo } from 'utils/apollo'
-import { gql } from '@apollo/client'
 
 export default function GamesPage(props: GamesTemplateProps) {
   return <Games {...props} />
@@ -12,22 +13,9 @@ export default function GamesPage(props: GamesTemplateProps) {
 export async function getStaticProps() {
   const apolloClient = initializeApollo()
 
-  const { data } = await apolloClient.query({
-    query: gql`
-      query GetGames {
-        games {
-          name
-          slug
-          cover {
-            url
-          }
-          developers {
-            name
-          }
-          price
-        }
-      }
-    `
+  const { data } = await apolloClient.query<GetGames, GetGamesVariables>({
+    query: GET_GAMES,
+    variables: { limit: 9 }
   })
 
   return {
@@ -36,7 +24,9 @@ export async function getStaticProps() {
       games: data.games.map((game) => ({
         title: game.name,
         developer: game.developers[0].name,
-        img: `http://localhost:1337${game.cover.url}`,
+        img: game.cover
+          ? `http://localhost:1337${game.cover.url}`
+          : '/img/games/kingdom-Hearts-3-1.png',
         price: new Intl.NumberFormat('pt-BR', {
           style: 'currency',
           currency: 'BRL'
