@@ -16,14 +16,7 @@ export async function getStaticProps() {
   const apolloClient = initializeApollo()
 
   const {
-    data: {
-      banners,
-      newGames,
-      upcommingGames,
-      freeGames,
-      upcommingMoreGames,
-      sections
-    }
+    data: { banners, newGames, upcommingGames, freeGames, sections }
   } = await apolloClient.query<GetHome>({ query: GET_HOME })
 
   return {
@@ -41,6 +34,7 @@ export async function getStaticProps() {
           ribbonSize: banner.ribbon.size
         })
       })),
+      newGamesTitle: sections!.newGames?.title,
       newGames: newGames.map((game) => ({
         title: game.name,
         slug: game.slug,
@@ -48,6 +42,7 @@ export async function getStaticProps() {
         img: `http://localhost:1337${game.cover?.url}`,
         price: game.price
       })),
+      mostPopularGamesTitle: sections!.popularGames?.title,
       mostPopularHighlight: {
         title: sections?.popularGames?.title,
         subtitle: sections?.popularGames?.highlight?.title,
@@ -71,6 +66,7 @@ export async function getStaticProps() {
         img: `http://localhost:1337${game.cover?.url}`,
         price: game.price
       })),
+      upcomingGamesTitle: sections!.upcomingGames?.title,
       upcomingGames: upcommingGames.map((game) => ({
         title: game.name,
         slug: game.slug,
@@ -87,6 +83,7 @@ export async function getStaticProps() {
         floatImage: `http://localhost:1337${sections?.upcomingGames?.highlight?.floatImage?.url}`,
         alignment: sections?.upcomingGames?.highlight?.allignment
       },
+      freeGamesTitle: sections!.freeGames?.title,
       freeGames: freeGames.map((game) => ({
         title: game.name,
         slug: game.slug,
