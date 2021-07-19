@@ -1,9 +1,7 @@
-import gamesMock from 'components/GameCardSlider/mock'
-import highlightMock from 'components/Highlight/mock'
+import { GetHome } from 'graphql/generated/GetHome'
+import { GET_HOME } from 'graphql/queries/home'
 import Home, { HomeTemplateProps } from 'templates/Home'
 import { initializeApollo } from 'utils/apollo'
-import { GET_HOME } from 'graphql/queries/home'
-import { GetHome } from 'graphql/generated/GetHome'
 
 export default function Index(props: HomeTemplateProps) {
   return <Home {...props} />
@@ -17,12 +15,21 @@ export async function getStaticProps() {
 
   const apolloClient = initializeApollo()
 
-  const { data } = await apolloClient.query<GetHome>({ query: GET_HOME })
+  const {
+    data: {
+      banners,
+      newGames,
+      upcommingGames,
+      freeGames,
+      upcommingMoreGames,
+      sections
+    }
+  } = await apolloClient.query<GetHome>({ query: GET_HOME })
 
   return {
     props: {
       revalidate: 10,
-      banners: data.banners.map((banner) => ({
+      banners: banners.map((banner) => ({
         img: `http://localhost:1337${banner.image?.url}`,
         title: banner.title,
         subtitle: banner.subtitle,
@@ -34,14 +41,68 @@ export async function getStaticProps() {
           ribbonSize: banner.ribbon.size
         })
       })),
-      newGames: gamesMock,
-      mostPopularHighlight: highlightMock,
-      mostPopularGames: gamesMock,
-      upcomingGames: gamesMock,
-      upcomingHighlight: highlightMock,
-      upcomingMoreGames: gamesMock,
-      freeGames: gamesMock,
-      freeHighlight: highlightMock
+      newGames: newGames.map((game) => ({
+        title: game.name,
+        slug: game.slug,
+        developer: game.developers[0].name,
+        img: `http://localhost:1337${game.cover?.url}`,
+        price: game.price
+      })),
+      mostPopularHighlight: {
+        title: sections?.popularGames?.title,
+        subtitle: sections?.popularGames?.highlight?.title,
+        backgroundImage: `http://localhost:1337${sections?.popularGames?.highlight?.background?.url}`,
+        buttonLabel: sections?.popularGames?.highlight?.buttonLabel,
+        buttonLink: sections?.popularGames?.highlight?.buttonLink,
+        floatImage: `http://localhost:1337${sections?.popularGames?.highlight?.floatImage?.url}`,
+        alignment: sections?.popularGames?.highlight?.allignment,
+        games: sections?.popularGames?.games.map((game) => ({
+          title: game.name,
+          slug: game.slug,
+          developer: game.developers[0].name,
+          img: `http://localhost:1337${game.cover?.url}`,
+          price: game.price
+        }))
+      },
+      mostPopularGames: sections!.popularGames!.games.map((game) => ({
+        title: game.name,
+        slug: game.slug,
+        developer: game.developers[0].name,
+        img: `http://localhost:1337${game.cover?.url}`,
+        price: game.price
+      })),
+      upcomingGames: upcommingGames.map((game) => ({
+        title: game.name,
+        slug: game.slug,
+        developer: game.developers[0].name,
+        img: `http://localhost:1337${game.cover?.url}`,
+        price: game.price
+      })),
+      upcomingHighlight: {
+        title: sections?.upcomingGames?.title,
+        subtitle: sections?.upcomingGames?.highlight?.title,
+        backgroundImage: `http://localhost:1337${sections?.upcomingGames?.highlight?.background?.url}`,
+        buttonLabel: sections?.upcomingGames?.highlight?.buttonLabel,
+        buttonLink: sections?.upcomingGames?.highlight?.buttonLink,
+        floatImage: `http://localhost:1337${sections?.upcomingGames?.highlight?.floatImage?.url}`,
+        alignment: sections?.upcomingGames?.highlight?.allignment
+      },
+      freeGames: freeGames.map((game) => ({
+        title: game.name,
+        slug: game.slug,
+        developer: game.developers[0].name,
+        img: `http://localhost:1337${game.cover?.url}`,
+        price: game.price
+      })),
+      freeHighlight: {
+        title: sections?.freeGames?.title,
+        subtitle: sections?.freeGames?.highlight?.title,
+        backgroundImage: `http://localhost:1337${sections?.freeGames?.highlight?.background?.url}`,
+        buttonLabel: sections?.freeGames?.highlight?.buttonLabel,
+        buttonLink: sections?.freeGames?.highlight?.buttonLink,
+        floatImage: `http://localhost:1337${sections?.freeGames?.highlight?.floatImage?.url}`,
+        alignment: sections?.freeGames?.highlight?.allignment
+      }
     }
   }
 }
