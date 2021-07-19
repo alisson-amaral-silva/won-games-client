@@ -1,4 +1,4 @@
-import { GetHome } from 'graphql/generated/GetHome'
+import { GetHome, GetHomeVariables } from 'graphql/generated/GetHome'
 import { GET_HOME } from 'graphql/queries/home'
 import Home, { HomeTemplateProps } from 'templates/Home'
 import { initializeApollo } from 'utils/apollo'
@@ -16,9 +16,14 @@ export async function getStaticProps() {
 
   const apolloClient = initializeApollo()
 
+  const TODAY = new Date().toISOString().slice(0, 10)
+
   const {
     data: { banners, newGames, upcommingGames, freeGames, sections }
-  } = await apolloClient.query<GetHome>({ query: GET_HOME })
+  } = await apolloClient.query<GetHome, GetHomeVariables>({
+    query: GET_HOME,
+    variables: { date: TODAY }
+  })
 
   return {
     props: {
