@@ -181,7 +181,7 @@ export interface GetHome_sections_popularGames_games {
 
 export interface GetHome_sections_popularGames {
   __typename: "ComponentPagePopularGames";
-  title: string;
+  title: string | null;
   highlight: GetHome_sections_popularGames_highlight | null;
   games: GetHome_sections_popularGames_games[];
 }

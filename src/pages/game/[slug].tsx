@@ -1,15 +1,21 @@
-import Game, { GameTemplateProps } from 'templates/Game'
-import gamesMock from 'components/GameCardSlider/mock'
-import highlightMock from 'components/Highlight/mock'
-import { useRouter } from 'next/router'
-import { initializeApollo } from 'utils/apollo'
-import { GetGames, GetGamesVariables } from 'graphql/generated/GetGames'
-import { GET_GAMES, GET_GAME_BY_SLUG } from 'graphql/queries/games'
 import {
   GetGameBySlug,
   GetGameBySlugVariables
 } from 'graphql/generated/GetGameBySlug'
+import { GetGames, GetGamesVariables } from 'graphql/generated/GetGames'
+import { GetRecommended } from 'graphql/generated/GetRecommended'
+import {
+  GetUpcoming,
+  GetUpcomingVariables
+} from 'graphql/generated/GetUpcoming'
+import { GET_GAMES, GET_GAME_BY_SLUG } from 'graphql/queries/games'
+import { GET_RECOMMENDED } from 'graphql/queries/recommended'
+import { GET_UPCOMING } from 'graphql/queries/upcoming'
 import { GetStaticProps } from 'next'
+import { useRouter } from 'next/router'
+import Game, { GameTemplateProps } from 'templates/Game'
+import { initializeApollo } from 'utils/apollo'
+import { gamesMapper, highlightMapper } from 'utils/mappers'
 
 const apolloClient = initializeApollo()
 
@@ -53,6 +59,20 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
   const game = data.games[0]
 
+  const { data: recommended } = await apolloClient.query<GetRecommended>({
+    query: GET_RECOMMENDED
+  })
+
+  // get upcmoming games and highlight
+  const TODAY = new Date().toISOString().slice(0, 10)
+  const { data: upcoming } = await apolloClient.query<
+    GetUpcoming,
+    GetUpcomingVariables
+  >({
+    query: GET_UPCOMING,
+    variables: { date: TODAY }
+  })
+
   return {
     props: {
       revalidate: 60,
@@ -74,9 +94,11 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
         rating: game.rating,
         genres: game.categories.map((category) => category.name)
       },
-      upcommingGames: gamesMock,
-      upcommingHighlight: highlightMock,
-      recommendedGames: gamesMock
+      upcommingGames: gamesMapper(upcoming.upcommingMoreGames),
+      upcommingHighlight: highlightMapper(
+        upcoming.showcase?.upcomingGames?.highlight
+      ),
+      recommendedGames: gamesMapper(recommended.recommended?.section?.games)
     }
   }
 }
