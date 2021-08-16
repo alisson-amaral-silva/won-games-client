@@ -13,23 +13,15 @@ export default function GamesPage(props: GamesTemplateProps) {
 export async function getStaticProps() {
   const apolloClient = initializeApollo()
 
-  const { data } = await apolloClient.query<GetGames, GetGamesVariables>({
+  await apolloClient.query<GetGames, GetGamesVariables>({
     query: GET_GAMES,
-    variables: { limit: 9 }
+    variables: { limit: 15 }
   })
 
   return {
     props: {
       revalidate: 60, // segura os dados por 60 segundos na tela por todas as req e dps de 60 sec da refresh na pagina com novos dados
-      games: data.games.map((game) => ({
-        title: game.name,
-        slug: game.slug,
-        developer: game.developers[0].name,
-        img: game.cover
-          ? `http://localhost:1337${game.cover.url}`
-          : '/img/games/kingdom-Hearts-3-1.png',
-        price: game.price
-      })),
+      initializeApolloState: apolloClient.cache.extract(), // como ja peguei os dados de games acima, isso vai extrair os dados via cache e mandar para o client side
       filterItems: inputsMock
     }
   }

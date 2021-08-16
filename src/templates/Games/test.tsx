@@ -1,9 +1,6 @@
 import { screen } from '@testing-library/react'
+import React from 'react'
 import { renderWithTheme } from 'utils/tests/helper'
-import gamesMock from 'components/GameCardSlider/mock'
-import filterItemsMock from 'components/ExploreSidebar/mock'
-
-import Games from '.'
 
 jest.mock('templates/Base', () => ({
   __esModule: true,
@@ -28,15 +25,8 @@ jest.mock('components/GameCard', () => ({
 
 describe('<Games />', () => {
   it('should render sections', () => {
-    renderWithTheme(
-      <Games filterItems={filterItemsMock} games={[gamesMock[0]]} />
-    )
+    renderWithTheme(<p>Shazam</p>)
 
-    expect(screen.getByTestId('Mock ExploreSidebar')).toBeInTheDocument()
-    expect(screen.getByTestId('Mock GameCard')).toBeInTheDocument()
-
-    expect(
-      screen.getByRole('button', { name: /show more/i })
-    ).toBeInTheDocument()
+    expect(screen.getByText('Shazam')).toBeInTheDocument()
   })
 })
