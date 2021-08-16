@@ -1,15 +1,12 @@
-import GameCard, { GameCardProps } from 'components/GameCard'
+import { KeyboardArrowDown as ArrowDown } from '@styled-icons/material-outlined/KeyboardArrowDown'
 import ExploreSidebar, { ItemProps } from 'components/ExploreSidebar'
-
+import GameCard, { GameCardProps } from 'components/GameCard'
+import { Grid } from 'components/Grid'
+import { useQueryGames } from 'graphql/queries/games'
 import React from 'react'
+import Loader from 'react-loader-spinner'
 import Base from 'templates/Base'
 import * as S from './styles'
-import { Grid } from 'components/Grid'
-import { KeyboardArrowDown as ArrowDown } from '@styled-icons/material-outlined/KeyboardArrowDown'
-import { useQuery } from '@apollo/client'
-import { GetGames, GetGamesVariables } from 'graphql/generated/GetGames'
-import { GET_GAMES } from 'graphql/queries/games'
-import Loader from 'react-loader-spinner'
 
 export type GamesTemplateProps = {
   games?: GameCardProps[]
@@ -17,7 +14,7 @@ export type GamesTemplateProps = {
 }
 
 const Games = ({ filterItems, games = [] }: GamesTemplateProps) => {
-  const { data, loading } = useQuery<GetGames, GetGamesVariables>(GET_GAMES, {
+  const { data, loading, fetchMore } = useQueryGames({
     variables: { limit: 15 }
   })
 
@@ -26,7 +23,7 @@ const Games = ({ filterItems, games = [] }: GamesTemplateProps) => {
   }
 
   const handleShowMore = () => {
-    return
+    return fetchMore({ variables: { limit: 15, start: data?.games.length } })
   }
 
   return (
@@ -41,7 +38,7 @@ const Games = ({ filterItems, games = [] }: GamesTemplateProps) => {
         ) : (
           <section>
             <Grid>
-              {data?.games.map((game, index) => (
+              {data?.games.map((game) => (
                 <>
                   <GameCard
                     key={`${game.slug}`}
