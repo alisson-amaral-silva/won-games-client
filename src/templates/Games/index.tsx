@@ -3,8 +3,11 @@ import ExploreSidebar, { ItemProps } from 'components/ExploreSidebar'
 import GameCard, { GameCardProps } from 'components/GameCard'
 import { Grid } from 'components/Grid'
 import { useQueryGames } from 'graphql/queries/games'
+import { useRouter } from 'next/router'
+import { ParsedUrlQueryInput } from 'querystring'
 import React from 'react'
 import Base from 'templates/Base'
+import { parseQueryStringToFilter, parseQueryStringToWhere } from 'utils/filter'
 import * as S from './styles'
 
 export type GamesTemplateProps = {
@@ -13,11 +16,21 @@ export type GamesTemplateProps = {
 }
 
 const Games = ({ filterItems }: GamesTemplateProps) => {
-  const { data, loading, fetchMore } = useQueryGames({
-    variables: { limit: 15 }
+  const { push, query } = useRouter()
+
+  const { data, fetchMore } = useQueryGames({
+    variables: {
+      limit: 15,
+      where: parseQueryStringToWhere({ queryString: query, filterItems }),
+      sort: query.sort as string | null
+    }
   })
 
-  const handleFilter = () => {
+  const handleFilter = (items: ParsedUrlQueryInput) => {
+    push({
+      pathname: '/games',
+      query: items
+    })
     return
   }
 
@@ -28,7 +41,14 @@ const Games = ({ filterItems }: GamesTemplateProps) => {
   return (
     <Base>
       <S.Main>
-        <ExploreSidebar items={filterItems} onFilter={handleFilter} />
+        <ExploreSidebar
+          initialValues={parseQueryStringToFilter({
+            queryString: query,
+            filterItems
+          })}
+          items={filterItems}
+          onFilter={handleFilter}
+        />
 
         <section>
           <Grid>

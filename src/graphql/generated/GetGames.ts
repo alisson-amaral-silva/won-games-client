@@ -33,4 +33,6 @@ export interface GetGames {
 export interface GetGamesVariables {
   limit: number;
   start?: number | null;
+  where?: any | null;
+  sort?: string | null;
 }
