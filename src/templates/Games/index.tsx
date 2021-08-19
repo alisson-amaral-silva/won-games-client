@@ -1,19 +1,22 @@
-import { KeyboardArrowDown as ArrowDown } from '@styled-icons/material-outlined/KeyboardArrowDown'
-import Empty from 'components/Empty'
-import ExploreSidebar, { ItemProps } from 'components/ExploreSidebar'
-import GameCard, { GameCardProps } from 'components/GameCard'
-import { Grid } from 'components/Grid'
-import { useQueryGames } from 'graphql/queries/games'
-import { useRouter } from 'next/router'
 import { ParsedUrlQueryInput } from 'querystring'
+import { useRouter } from 'next/router'
+
+import { useQueryGames } from 'graphql/queries/games'
+import { parseQueryStringToFilter, parseQueryStringToWhere } from 'utils/filter'
+
+import Base from 'templates/Base'
+import { KeyboardArrowDown as ArrowDown } from '@styled-icons/material-outlined/KeyboardArrowDown'
+
+import ExploreSidebar, { ItemProps } from 'components/ExploreSidebar'
+import GameCard from 'components/GameCard'
+import { Grid } from 'components/Grid'
+
+import * as S from './styles'
+import Empty from 'components/Empty'
 import React from 'react'
 import Loader from 'react-loader-spinner'
-import Base from 'templates/Base'
-import { parseQueryStringToFilter, parseQueryStringToWhere } from 'utils/filter'
-import * as S from './styles'
 
 export type GamesTemplateProps = {
-  games?: GameCardProps[]
   filterItems: ItemProps[]
 }
 
@@ -29,6 +32,12 @@ const Games = ({ filterItems }: GamesTemplateProps) => {
     }
   })
 
+  if (!data) return <p>loading...</p>
+
+  const { games, gamesConnection } = data
+
+  const hasMoreGames = games.length < (gamesConnection?.values?.length || 0)
+
   const handleFilter = (items: ParsedUrlQueryInput) => {
     push({
       pathname: '/games',
@@ -38,7 +47,7 @@ const Games = ({ filterItems }: GamesTemplateProps) => {
   }
 
   const handleShowMore = () => {
-    return fetchMore({ variables: { limit: 15, start: data?.games.length } })
+    fetchMore({ variables: { limit: 15, start: data?.games.length } })
   }
 
   return (
@@ -52,36 +61,39 @@ const Games = ({ filterItems }: GamesTemplateProps) => {
           items={filterItems}
           onFilter={handleFilter}
         />
+
         <section>
           {data?.games.length ? (
             <>
               <Grid>
                 {data?.games.map((game) => (
-                  <>
-                    <GameCard
-                      key={`${game.slug}`}
-                      title={game.name}
-                      slug={game.slug}
-                      developer={game.developers[0].name}
-                      img={`http://localhost:1337${game.cover!.url}`}
-                      price={game.price}
-                    />
-                  </>
+                  <GameCard
+                    key={game.slug}
+                    title={game.name}
+                    slug={game.slug}
+                    developer={game.developers[0].name}
+                    img={`http://localhost:1337${game.cover!.url}`}
+                    price={game.price}
+                  />
                 ))}
               </Grid>
-              {loading ? (
-                <S.Loader>
-                  <Loader
-                    type="ThreeDots"
-                    color="#ffffff"
-                    height={80}
-                    width={80}
-                  />
-                </S.Loader>
-              ) : (
-                <S.ShowMore role="button" onClick={handleShowMore}>
-                  <p>Show More</p>
-                  <ArrowDown size={35} />
+              {hasMoreGames && (
+                <S.ShowMore>
+                  {loading ? (
+                    <S.Loader>
+                      <Loader
+                        type="ThreeDots"
+                        color="#ffffff"
+                        height={80}
+                        width={80}
+                      />
+                    </S.Loader>
+                  ) : (
+                    <S.ShowMore role="button" onClick={handleShowMore}>
+                      <p>Show More</p>
+                      <ArrowDown size={35} />
+                    </S.ShowMore>
+                  )}
                 </S.ShowMore>
               )}
             </>
@@ -89,6 +101,7 @@ const Games = ({ filterItems }: GamesTemplateProps) => {
             <Empty
               title=":("
               description="We didn't find any games with this filter"
+              hasLink
             />
           )}
         </section>
