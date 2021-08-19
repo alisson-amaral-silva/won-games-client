@@ -64,4 +64,16 @@ describe('<Games />', () => {
 
     userEvent.click(await screen.findByRole('button', { name: /show more/i }))
   })
+
+  it('should render empty when no games are found', async () => {
+    renderWithTheme(
+      <MockedProvider mocks={[]}>
+        <Games filterItems={filterItemsMock} />
+      </MockedProvider>
+    )
+
+    expect(
+      await screen.findByText(/we didn't find any games with this filter/i)
+    ).toBeInTheDocument()
+  })
 })
