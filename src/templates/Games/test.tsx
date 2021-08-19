@@ -1,12 +1,20 @@
 import { MockedProvider } from '@apollo/client/testing'
 import { screen } from '@testing-library/react'
-import userEvent from '@testing-library/user-event'
 import filterItemsMock from 'components/ExploreSidebar/mock'
-import React from 'react'
 import { renderWithTheme } from 'utils/tests/helper'
 import Games from '.'
-import { fetchMoreMock, gamesMock } from './mocks'
-import apolloCache from 'utils/apolloCache'
+import { gamesMock } from './mocks'
+
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const useRouter = jest.spyOn(require('next/router'), 'useRouter')
+const push = jest.fn()
+
+useRouter.mockImplementation(() => ({
+  push,
+  query: '',
+  asPath: '',
+  route: '/'
+}))
 
 jest.mock('templates/Base', () => ({
   __esModule: true,
@@ -32,7 +40,7 @@ jest.mock('components/GameCard', () => ({
 describe('<Games />', () => {
   it('should render sections', async () => {
     renderWithTheme(
-      <MockedProvider mocks={[gamesMock]}>
+      <MockedProvider mocks={[gamesMock]} addTypename={false}>
         <Games filterItems={filterItemsMock} />
       </MockedProvider>
     )
@@ -44,13 +52,14 @@ describe('<Games />', () => {
     expect(await screen.findByTestId('Mock ExploreSidebar')).toBeInTheDocument()
     expect(await screen.findByRole('button', { name: /show more/i }))
   })
-  it('should render more games when show more is clicked', async () => {
+
+  it('should render empty when no games found', async () => {
     renderWithTheme(
-      <MockedProvider mocks={[gamesMock, fetchMoreMock]} cache={apolloCache}>
+      <MockedProvider mocks={[]} addTypename={false}>
         <Games filterItems={filterItemsMock} />
       </MockedProvider>
     )
 
-    userEvent.click(await screen.findByRole('button', { name: /show more/i }))
+    expect(await screen.findByText(/loading.../i)).toBeInTheDocument()
   })
 })

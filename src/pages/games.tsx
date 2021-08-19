@@ -1,8 +1,9 @@
-import inputsMock from 'components/ExploreSidebar/mock'
 import { GetGames, GetGamesVariables } from 'graphql/generated/GetGames'
 import { GET_GAMES } from 'graphql/queries/games'
+import { GetServerSidePropsContext } from 'next'
 import Games, { GamesTemplateProps } from 'templates/Games'
 import { initializeApollo } from 'utils/apollo'
+import { parseQueryStringToWhere } from 'utils/filter'
 
 export default function GamesPage(props: GamesTemplateProps) {
   return <Games {...props} />
@@ -10,19 +11,84 @@ export default function GamesPage(props: GamesTemplateProps) {
 
 // Cada vez que o usuario add ou remove as coisas ela não é estatica => serverSideProps
 // não muda muito => static
-export async function getStaticProps() {
+export async function getServerSideProps({ query }: GetServerSidePropsContext) {
   const apolloClient = initializeApollo()
+
+  const filterPrice = {
+    title: 'Price',
+    name: 'price_lte',
+    type: 'radio',
+    fields: [
+      { label: 'Free', name: 0 },
+      { label: 'Under $50', name: 50 },
+      { label: 'Under $100', name: 100 },
+      { label: 'Under $150', name: 150 },
+      { label: 'Under $250', name: 250 },
+      { label: 'Under $500', name: 500 }
+    ]
+  }
+
+  const filterPlatforms = {
+    title: 'Platforms',
+    name: 'platforms',
+    type: 'checkbox',
+    fields: [
+      { label: 'Windows', name: 'windows' },
+      { label: 'Linux', name: 'linux' },
+      { label: 'Mac OS', name: 'mac' }
+    ]
+  }
+
+  const filterSort = {
+    title: 'Sort by price',
+    name: 'sort',
+    type: 'radio',
+    fields: [
+      { label: 'Lowest to highest', name: 'price:asc' },
+      { label: 'Highest to lowest', name: 'price:desc' }
+    ]
+  }
+
+  const filterCategories = {
+    title: 'Genres',
+    name: 'categories',
+    type: 'checkbox',
+    fields: [
+      { label: 'Action', name: 'action' },
+      { label: 'Adventure', name: 'adventure' },
+      { label: 'Sports', name: 'sports' },
+      { label: 'Puzzle', name: 'puzzle' },
+      { label: 'Horror', name: 'horror' },
+      { label: 'Platform', name: 'platform' },
+      { label: 'Fantasy', name: 'fantasy' },
+      { label: 'RPG', name: 'role-playing' },
+      { label: 'JRPG', name: 'jrpg' },
+      { label: 'Simulation', name: 'simulation' },
+      { label: 'Strategy', name: 'strategy' },
+      { label: 'Shooter', name: 'shooter' }
+    ]
+  }
+
+  const filterItems = [
+    filterSort,
+    filterPrice,
+    filterPlatforms,
+    filterCategories
+  ]
 
   await apolloClient.query<GetGames, GetGamesVariables>({
     query: GET_GAMES,
-    variables: { limit: 15 }
+    variables: {
+      limit: 15,
+      where: parseQueryStringToWhere({ queryString: query, filterItems }),
+      sort: query.srt as string | null
+    }
   })
 
   return {
     props: {
-      revalidate: 60, // segura os dados por 60 segundos na tela por todas as req e dps de 60 sec da refresh na pagina com novos dados
       initializeApolloState: apolloClient.cache.extract(), // como ja peguei os dados de games acima, isso vai extrair os dados via cache e mandar para o client side
-      filterItems: inputsMock
+      filterItems: filterItems
     }
   }
 }
