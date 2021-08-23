@@ -3,7 +3,7 @@
 // @generated
 // This file was automatically generated and should not be edited.
 
-import { ENUM_COMPONENTPAGEHIGHLIGHT_ALLIGNMENT } from "./globalTypes";
+import { ENUM_COMPONENTPAGEHIGHLIGHT_ALIGNMENT } from "./globalTypes";
 
 // ====================================================
 // GraphQL query operation: GetCart
@@ -27,7 +27,7 @@ export interface GetCart_cart_cart_highlight {
   floatImage: GetCart_cart_cart_highlight_floatImage | null;
   buttonLabel: string;
   buttonLink: string;
-  allignment: ENUM_COMPONENTPAGEHIGHLIGHT_ALLIGNMENT | null;
+  alignment: ENUM_COMPONENTPAGEHIGHLIGHT_ALIGNMENT | null;
 }
 
 export interface GetCart_cart_cart_games_cover {

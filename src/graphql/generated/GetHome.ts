@@ -3,7 +3,7 @@
 // @generated
 // This file was automatically generated and should not be edited.
 
-import { ENUM_COMPONENTPAGERIBBON_COLOR, ENUM_COMPONENTPAGERIBBON_SIZE, ENUM_COMPONENTPAGEHIGHLIGHT_ALLIGNMENT } from "./globalTypes";
+import { ENUM_COMPONENTPAGERIBBON_COLOR, ENUM_COMPONENTPAGERIBBON_SIZE, ENUM_COMPONENTPAGEHIGHLIGHT_ALIGNMENT } from "./globalTypes";
 
 // ====================================================
 // GraphQL query operation: GetHome
@@ -134,7 +134,7 @@ export interface GetHome_sections_newGames_highlight {
   floatImage: GetHome_sections_newGames_highlight_floatImage | null;
   buttonLabel: string;
   buttonLink: string;
-  allignment: ENUM_COMPONENTPAGEHIGHLIGHT_ALLIGNMENT | null;
+  alignment: ENUM_COMPONENTPAGEHIGHLIGHT_ALIGNMENT | null;
 }
 
 export interface GetHome_sections_newGames {
@@ -161,7 +161,7 @@ export interface GetHome_sections_popularGames_highlight {
   floatImage: GetHome_sections_popularGames_highlight_floatImage | null;
   buttonLabel: string;
   buttonLink: string;
-  allignment: ENUM_COMPONENTPAGEHIGHLIGHT_ALLIGNMENT | null;
+  alignment: ENUM_COMPONENTPAGEHIGHLIGHT_ALIGNMENT | null;
 }
 
 export interface GetHome_sections_popularGames_games_cover {
@@ -209,7 +209,7 @@ export interface GetHome_sections_upcomingGames_highlight {
   floatImage: GetHome_sections_upcomingGames_highlight_floatImage | null;
   buttonLabel: string;
   buttonLink: string;
-  allignment: ENUM_COMPONENTPAGEHIGHLIGHT_ALLIGNMENT | null;
+  alignment: ENUM_COMPONENTPAGEHIGHLIGHT_ALIGNMENT | null;
 }
 
 export interface GetHome_sections_upcomingGames {
@@ -236,7 +236,7 @@ export interface GetHome_sections_freeGames_highlight {
   floatImage: GetHome_sections_freeGames_highlight_floatImage | null;
   buttonLabel: string;
   buttonLink: string;
-  allignment: ENUM_COMPONENTPAGEHIGHLIGHT_ALLIGNMENT | null;
+  alignment: ENUM_COMPONENTPAGEHIGHLIGHT_ALIGNMENT | null;
 }
 
 export interface GetHome_sections_freeGames {
