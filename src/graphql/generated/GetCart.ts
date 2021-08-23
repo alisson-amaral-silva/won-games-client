@@ -42,6 +42,7 @@ export interface GetCart_cart_cart_games_developers {
 
 export interface GetCart_cart_cart_games {
   __typename: "Game";
+  id: string;
   name: string;
   slug: string;
   cover: GetCart_cart_cart_games_cover | null;
