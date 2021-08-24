@@ -1380,7 +1380,7 @@ input editComponentPageButtonInput {
   link: String
 }
 
-enum ENUM_COMPONENTPAGEHIGHLIGHT_ALLIGNMENT {
+enum ENUM_COMPONENTPAGEHIGHLIGHT_ALIGNMENT {
   right
   left
 }
@@ -1393,7 +1393,7 @@ type ComponentPageHighlight {
   floatImage: UploadFile
   buttonLabel: String!
   buttonLink: String!
-  allignment: ENUM_COMPONENTPAGEHIGHLIGHT_ALLIGNMENT
+  alignment: ENUM_COMPONENTPAGEHIGHLIGHT_ALIGNMENT
 }
 
 input ComponentPageHighlightInput {
@@ -1403,7 +1403,7 @@ input ComponentPageHighlightInput {
   floatImage: ID
   buttonLabel: String!
   buttonLink: String!
-  allignment: ENUM_COMPONENTPAGEHIGHLIGHT_ALLIGNMENT
+  alignment: ENUM_COMPONENTPAGEHIGHLIGHT_ALIGNMENT
 }
 
 input editComponentPageHighlightInput {
@@ -1414,7 +1414,7 @@ input editComponentPageHighlightInput {
   floatImage: ID
   buttonLabel: String
   buttonLink: String
-  allignment: ENUM_COMPONENTPAGEHIGHLIGHT_ALLIGNMENT
+  alignment: ENUM_COMPONENTPAGEHIGHLIGHT_ALIGNMENT
 }
 
 type ComponentPagePopularGames {
