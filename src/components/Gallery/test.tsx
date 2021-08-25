@@ -1,12 +1,12 @@
 import 'match-media-mock'
-import { fireEvent, screen } from '@testing-library/react'
-import { renderWithTheme } from 'utils/tests/helper'
+import { fireEvent } from '@testing-library/react'
+import { render, screen } from 'utils/test-utils'
 import Gallery from '.'
 import items from './mock'
 
 describe('<Gallery  />', () => {
   it('should render the heading', () => {
-    renderWithTheme(<Gallery items={items.slice(0, 2)} />)
+    render(<Gallery items={items.slice(0, 2)} />)
 
     expect(
       screen.getByRole('button', { name: /Gallery Image 1/i })
@@ -18,7 +18,7 @@ describe('<Gallery  />', () => {
   })
 
   it('should render open Modal', () => {
-    renderWithTheme(<Gallery items={items.slice(0, 2)} />)
+    render(<Gallery items={items.slice(0, 2)} />)
 
     const modal = screen.getByLabelText('modal')
     //getAttribute sempre retorna o atributo selecionado como string
@@ -34,7 +34,7 @@ describe('<Gallery  />', () => {
   })
 
   it('should open Modal with selected image', async () => {
-    renderWithTheme(<Gallery items={items.slice(0, 2)} />)
+    render(<Gallery items={items.slice(0, 2)} />)
 
     fireEvent.click(screen.getByRole('button', { name: /Gallery Image 2/i }))
 
@@ -44,7 +44,7 @@ describe('<Gallery  />', () => {
   })
 
   it('should close Modal when overlay or button clicked', () => {
-    renderWithTheme(<Gallery items={items.slice(0, 2)} />)
+    render(<Gallery items={items.slice(0, 2)} />)
 
     const modal = screen.getByLabelText('modal')
 
@@ -58,7 +58,7 @@ describe('<Gallery  />', () => {
   })
 
   it('should close Modal when esc button clicked', () => {
-    const { container } = renderWithTheme(<Gallery items={items.slice(0, 2)} />)
+    const { container } = render(<Gallery items={items.slice(0, 2)} />)
 
     const modal = screen.getByLabelText('modal')
 

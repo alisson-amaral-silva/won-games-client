@@ -1,12 +1,12 @@
-import { screen, waitFor } from '@testing-library/react'
-import { renderWithTheme } from 'utils/tests/helper'
+import { waitFor } from '@testing-library/react'
+import { render, screen } from 'utils/test-utils'
 import userEvent from '@testing-library/user-event'
 import Checkbox from '.'
 import theme from 'styles/theme'
 
 describe('<Checkbox  />', () => {
   it('should render the heading', () => {
-    renderWithTheme(<Checkbox label="checkbox label" labelFor="check" />)
+    render(<Checkbox label="checkbox label" labelFor="check" />)
 
     expect(screen.getByRole('checkbox')).toBeInTheDocument()
     expect(screen.getByLabelText(/checkbox label/i)).toBeInTheDocument()
@@ -14,7 +14,7 @@ describe('<Checkbox  />', () => {
   })
 
   it('should render without label', () => {
-    renderWithTheme(<Checkbox />)
+    render(<Checkbox />)
 
     //sempre que precisa de buscar algo que pode não ter na tela, usar queryByWhatever
     expect(screen.queryByLabelText('Checkbox')).not.toBeInTheDocument()
@@ -23,7 +23,7 @@ describe('<Checkbox  />', () => {
   it('should dispatch onCheck when status changes', async () => {
     const onCheck = jest.fn()
 
-    renderWithTheme(<Checkbox label="Checkbox" onCheck={onCheck} />)
+    render(<Checkbox label="Checkbox" onCheck={onCheck} />)
 
     expect(onCheck).not.toHaveBeenCalled()
 
@@ -37,7 +37,7 @@ describe('<Checkbox  />', () => {
   it('should dispatch onCheck when status changes', async () => {
     const onCheck = jest.fn()
 
-    renderWithTheme(<Checkbox label="Checkbox" onCheck={onCheck} isChecked />)
+    render(<Checkbox label="Checkbox" onCheck={onCheck} isChecked />)
 
     userEvent.click(screen.getByRole('checkbox'))
     await waitFor(() => {
@@ -47,7 +47,7 @@ describe('<Checkbox  />', () => {
   })
 
   it('should render with label (black)', () => {
-    renderWithTheme(<Checkbox label="Radio" labelColor="black" />)
+    render(<Checkbox label="Radio" labelColor="black" />)
 
     const label = screen.getByText('Radio')
     expect(label).toBeInTheDocument()
@@ -55,7 +55,7 @@ describe('<Checkbox  />', () => {
   })
 
   it('should be accessible with tab', async () => {
-    renderWithTheme(<Checkbox label="Checkbox" labelFor="Checkbox" />)
+    render(<Checkbox label="Checkbox" labelFor="Checkbox" />)
 
     expect(document.body).toHaveFocus()
 

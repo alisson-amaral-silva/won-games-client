@@ -1,7 +1,6 @@
 import { MockedProvider } from '@apollo/client/testing'
-import { screen } from '@testing-library/react'
 import filterItemsMock from 'components/ExploreSidebar/mock'
-import { renderWithTheme } from 'utils/tests/helper'
+import { render, screen } from 'utils/test-utils'
 import Games from '.'
 import { gamesMock } from './mocks'
 
@@ -46,7 +45,7 @@ jest.mock('next/link', () => ({
 
 describe('<Games />', () => {
   it('should render sections', async () => {
-    renderWithTheme(
+    render(
       <MockedProvider mocks={[gamesMock]} addTypename={false}>
         <Games filterItems={filterItemsMock} />
       </MockedProvider>
@@ -61,7 +60,7 @@ describe('<Games />', () => {
   })
 
   it('should render empty when no games found', async () => {
-    renderWithTheme(
+    render(
       <MockedProvider mocks={[]} addTypename={false}>
         <Games filterItems={filterItemsMock} />
       </MockedProvider>

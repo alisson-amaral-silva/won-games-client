@@ -1,10 +1,10 @@
 import theme from 'styles/theme'
-import { renderWithTheme } from 'utils/tests/helper'
+import { render } from 'utils/test-utils'
 import { Grid } from '.'
 
 describe('<Grid  />', () => {
   it('should render the heading', () => {
-    const { container } = renderWithTheme(<Grid>Whatever</Grid>)
+    const { container } = render(<Grid>Whatever</Grid>)
 
     expect(container.firstChild).toHaveStyleRule(
       'grid-gap',

@@ -1,0 +1,4 @@
+{
+  "*.{json,md,html,scss}": ["prettier --write", "git add"],
+  ["**/!(src/utils/tests)/*.tsx"]: ["tslint --project tsconfig.json -c tslint.commit.json --fix", "prettier --write", "git add"]
+}
