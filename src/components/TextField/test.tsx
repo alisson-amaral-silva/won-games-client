@@ -1,14 +1,14 @@
-import { screen, waitFor } from '@testing-library/react'
+import { waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { EmailOutline } from '@styled-icons/evaicons-outline/EmailOutline'
 
-import { renderWithTheme } from 'utils/tests/helper'
+import { render, screen } from 'utils/test-utils'
 
 import TextField from '.'
 
 describe('<TextField />', () => {
   it('Renders with Label and icon', () => {
-    renderWithTheme(
+    render(
       <TextField
         icon={<EmailOutline data-testid="icon" />}
         label="Label"
@@ -21,13 +21,13 @@ describe('<TextField />', () => {
   })
 
   it('Renders without Label', () => {
-    renderWithTheme(<TextField icon={<EmailOutline data-testid="icon" />} />)
+    render(<TextField icon={<EmailOutline data-testid="icon" />} />)
 
     expect(screen.queryByLabelText('Label')).not.toBeInTheDocument()
   })
 
   it('Renders with placeholder', () => {
-    renderWithTheme(
+    render(
       <TextField
         icon={<EmailOutline data-testid="icon" />}
         placeholder="hey you"
@@ -39,7 +39,7 @@ describe('<TextField />', () => {
 
   it('Changes its value when typing', async () => {
     const onInput = jest.fn()
-    renderWithTheme(
+    render(
       <TextField
         icon={<EmailOutline data-testid="icon" />}
         onInput={onInput}
@@ -60,7 +60,7 @@ describe('<TextField />', () => {
   })
 
   it('Is accessible by tab', () => {
-    renderWithTheme(
+    render(
       <TextField
         icon={<EmailOutline data-testid="icon" />}
         label="TextField"
@@ -76,7 +76,7 @@ describe('<TextField />', () => {
   })
 
   it('should render an icon on the right side', () => {
-    renderWithTheme(
+    render(
       <TextField
         icon={<EmailOutline data-testid="icon" />}
         label="TextField"
@@ -90,7 +90,7 @@ describe('<TextField />', () => {
 
   it('should disable the textfield when disabled', async () => {
     const onInput = jest.fn()
-    renderWithTheme(
+    render(
       <TextField
         icon={<EmailOutline data-testid="icon" />}
         label="TextField"
@@ -114,7 +114,7 @@ describe('<TextField />', () => {
   })
 
   it('Is not accessible by tab when disabled', () => {
-    renderWithTheme(
+    render(
       <TextField
         icon={<EmailOutline data-testid="icon" />}
         label="TextField"
@@ -131,7 +131,7 @@ describe('<TextField />', () => {
   })
 
   it('Renders with error', () => {
-    renderWithTheme(
+    render(
       <TextField
         icon={<EmailOutline data-testid="icon" />}
         label="TextField"

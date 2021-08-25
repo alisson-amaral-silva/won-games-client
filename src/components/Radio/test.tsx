@@ -1,12 +1,12 @@
-import { screen, waitFor } from '@testing-library/react'
+import { waitFor } from '@testing-library/react'
 import Radio from '.'
 import theme from 'styles/theme'
 import userEvent from '@testing-library/user-event'
-import { renderWithTheme } from 'utils/tests/helper'
+import { render, screen } from 'utils/test-utils'
 
 describe('<Radio  />', () => {
   it('should render the heading', () => {
-    renderWithTheme(<Radio label="radio label" labelFor="radio" />)
+    render(<Radio label="radio label" labelFor="radio" />)
 
     expect(screen.getByRole('radio')).toBeInTheDocument()
     expect(screen.getByLabelText(/radio label/i)).toBeInTheDocument()
@@ -14,7 +14,7 @@ describe('<Radio  />', () => {
   })
 
   it('should render without label', () => {
-    renderWithTheme(<Radio />)
+    render(<Radio />)
 
     //sempre que precisa de buscar algo que pode não ter na tela, usar queryByWhatever
     expect(screen.queryByLabelText('Radio')).not.toBeInTheDocument()
@@ -23,7 +23,7 @@ describe('<Radio  />', () => {
   it('should dispatch onCheck when status changes', async () => {
     const onCheck = jest.fn()
 
-    renderWithTheme(
+    render(
       <Radio
         label="Radio"
         labelFor="Radio"
@@ -42,7 +42,7 @@ describe('<Radio  />', () => {
   })
 
   it('should render with label (black)', () => {
-    renderWithTheme(<Radio label="Radio" labelColor="black" />)
+    render(<Radio label="Radio" labelColor="black" />)
 
     const label = screen.getByText('Radio')
     expect(label).toBeInTheDocument()
@@ -50,7 +50,7 @@ describe('<Radio  />', () => {
   })
 
   it('should be accessible with tab', async () => {
-    renderWithTheme(<Radio label="Radio" labelFor="Radio" />)
+    render(<Radio label="Radio" labelFor="Radio" />)
 
     expect(document.body).toHaveFocus()
 

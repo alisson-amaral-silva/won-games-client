@@ -1,10 +1,9 @@
-import { renderWithTheme } from 'utils/tests/helper'
+import { render, screen } from 'utils/test-utils'
 import Auth from '.'
-import { screen } from '@testing-library/react'
 
 describe('<Auth  />', () => {
   it('should render all components children', () => {
-    renderWithTheme(
+    render(
       <Auth title="Auth title">
         <input type="text" />{' '}
       </Auth>

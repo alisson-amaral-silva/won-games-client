@@ -1,10 +1,10 @@
 import 'match-media-mock'
-import { renderWithTheme } from 'utils/tests/helper'
+import { render } from 'utils/test-utils'
 import { Divider } from '.'
 
 describe('<Divider  />', () => {
   it('should render the heading', () => {
-    const { container } = renderWithTheme(<Divider />)
+    const { container } = render(<Divider />)
     expect(container.firstChild).toHaveStyleRule(
       'background',
       'rgba(181,181,181,0.3)'

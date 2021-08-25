@@ -1,10 +1,10 @@
-import { renderWithTheme } from 'utils/tests/helper'
+import { render, screen } from 'utils/test-utils'
 import Menu from '.'
-import { fireEvent, screen } from '@testing-library/react'
+import { fireEvent } from '@testing-library/react'
 
 describe('<Menu  />', () => {
   it('should render the menu', () => {
-    renderWithTheme(<Menu />)
+    render(<Menu />)
 
     expect(screen.getByLabelText(/open menu/i)).toBeInTheDocument()
     expect(screen.getByLabelText(/open search/i)).toBeInTheDocument()
@@ -12,7 +12,7 @@ describe('<Menu  />', () => {
   })
 
   it('should handle the open/close mobile menu', () => {
-    renderWithTheme(<Menu />)
+    render(<Menu />)
 
     //selecionar o MenuFull(menu full screen)
     const fullMenuElement = screen.getByRole('navigation', { hidden: true })
@@ -34,13 +34,13 @@ describe('<Menu  />', () => {
   })
 
   it('should show register box when logged out', () => {
-    renderWithTheme(<Menu />)
+    render(<Menu />)
     expect(screen.getByText(/sign in/i)).toBeInTheDocument()
     expect(screen.getByText(/sign Up/i)).toBeInTheDocument()
   })
 
   it('should not show register box when logged out', () => {
-    renderWithTheme(<Menu username="Alisson" />)
+    render(<Menu username="Alisson" />)
 
     //para procuar algo que possa nãp estar na tela = query otherwise getByFodac
     expect(screen.queryByText(/sign in/i)).not.toBeInTheDocument()
