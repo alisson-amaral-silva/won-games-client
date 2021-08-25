@@ -25,7 +25,11 @@ describe('useCart', () => {
       wrapper
     })
 
+    expect(result.current.loading).toBe(true)
+
     await waitForNextUpdate()
+
+    expect(result.current.loading).toBe(false)
 
     expect(result.current.items).toStrictEqual(cartItems)
     expect(result.current.quantity).toBe(2)
