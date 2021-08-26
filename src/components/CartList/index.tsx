@@ -12,6 +12,7 @@ export type CartListProps = {
 
 const CartList = ({ hasButton = false }: CartListProps) => {
   const { items, total } = useCart()
+
   return (
     <S.Wrapper isEmpty={!items.length}>
       {items.length ? (
