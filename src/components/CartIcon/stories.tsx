@@ -15,5 +15,5 @@ export const Default: Story = () => <CartIcon />
 export const withItems: Story = (args) => <CartIcon {...args} />
 
 withItems.args = {
-  quantity: 3
+  quantity: '1'
 }
