@@ -1,4 +1,5 @@
 import { render, screen } from 'utils/test-utils'
+import { CartContextDefaultValues } from 'hooks/use-cart'
 import CartIcon from '.'
 
 describe('<CartIcon  />', () => {
@@ -10,7 +11,9 @@ describe('<CartIcon  />', () => {
   })
 
   it('should render with badge', () => {
-    render(<CartIcon quantity={12} />)
+    render(<CartIcon />, {
+      cartProviderProps: { ...CartContextDefaultValues, quantity: 12 }
+    })
 
     expect(screen.getByLabelText(/cart items/i)).toBeInTheDocument()
     expect(screen.getByText(/12/)).toBeInTheDocument()
