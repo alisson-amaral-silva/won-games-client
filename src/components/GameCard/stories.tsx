@@ -8,8 +8,7 @@ export default {
     title: 'Population Zero',
     slug: 'population-zero',
     developer: 'Rockstar Games',
-    img:
-      'https://avatars.githubusercontent.com/u/60556153?s=400&u=2b0f7c18e8adff995f5cc65423d3608804d36a6b&v=4',
+    img: 'https://avatars.githubusercontent.com/u/60556153?s=400&u=2b0f7c18e8adff995f5cc65423d3608804d36a6b&v=4',
     price: 235,
     promotionalPrice: 200
   },
