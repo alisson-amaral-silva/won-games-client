@@ -1,4 +1,4 @@
-import Button from 'components/Button'
+import Button, { ButtonProps } from 'components/Button'
 import {
   AddShoppingCart,
   RemoveShoppingCart
@@ -7,10 +7,16 @@ import { useCart } from 'hooks/use-cart'
 
 type CartButtonProps = {
   id: string
-}
+  hasText: boolean
+} & Pick<ButtonProps, 'size'>
 
-const CartButton = ({ id }: CartButtonProps) => {
+const CartButton = ({
+  id,
+  size = 'small',
+  hasText = false
+}: CartButtonProps) => {
   const { isInCart, addToCart, removeFromCart } = useCart()
+  const ButtonText = isInCart(id) ? 'Remove from cart' : 'Add to cart'
   return (
     <Button
       icon={
@@ -21,8 +27,10 @@ const CartButton = ({ id }: CartButtonProps) => {
         )
       }
       onClick={() => (isInCart(id) ? removeFromCart(id) : addToCart(id))}
-      size="small"
-    />
+      size={size}
+    >
+      {hasText && ButtonText}
+    </Button>
   )
 }
 
