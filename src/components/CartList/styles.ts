@@ -71,3 +71,8 @@ export const Total = styled.span`
     color: ${theme.colors.primary};
   `}
 `
+
+export const GamesList = styled.div`
+  max-height: 40rem;
+  overflow-y: auto;
+`
