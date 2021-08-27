@@ -1,15 +1,14 @@
+import CartList, { CartListProps } from 'components/CartList'
 import { Container } from 'components/Container'
-import Heading from 'components/Heading'
 import { Divider } from 'components/Divider'
+import { GameCardProps } from 'components/GameCard'
+import Heading from 'components/Heading'
+import { HighlightProps } from 'components/Highlight'
+import PaymentOptions, { PaymentOptionsProps } from 'components/PaymentOptions'
+import Showcase from 'components/Showcase'
+import React from 'react'
 import Base from 'templates/Base'
 import * as S from './styles'
-import { HighlightProps } from 'components/Highlight'
-import { GameCardProps } from 'components/GameCard'
-import Showcase from 'components/Showcase'
-import CartList, { CartListProps } from 'components/CartList'
-import PaymentOptions, { PaymentOptionsProps } from 'components/PaymentOptions'
-import React from 'react'
-import Empty from 'components/Empty'
 
 export type CartProps = {
   games: GameCardProps[]
@@ -17,7 +16,7 @@ export type CartProps = {
 } & CartListProps &
   Pick<PaymentOptionsProps, 'cards'>
 
-const Cart = ({ games, highlight, items, total, cards }: CartProps) => {
+const Cart = ({ games, highlight, cards }: CartProps) => {
   const handlePayment = () => ({})
 
   return (
@@ -26,18 +25,11 @@ const Cart = ({ games, highlight, items, total, cards }: CartProps) => {
         <Heading lineLeft lineColor="secondary">
           My Cart
         </Heading>
-        {items?.length ? (
-          <S.Content>
-            <CartList items={items} total={total} />
-            <PaymentOptions cards={cards} handlePayment={handlePayment} />
-          </S.Content>
-        ) : (
-          <Empty
-            title="Your cart is empty"
-            description="Games added to your cart will appear here"
-            hasLink
-          />
-        )}
+
+        <S.Content>
+          <CartList />
+          <PaymentOptions cards={cards} handlePayment={handlePayment} />
+        </S.Content>
 
         <Divider />
         <Showcase
