@@ -3,7 +3,7 @@ import { useState, InputHTMLAttributes } from 'react'
 import * as S from './styles'
 
 export type TextFieldProps = {
-  onInput?: (value: string) => void
+  onInputChange?: (value: string) => void
   label?: string
   initialValue?: string
   icon?: React.ReactNode
@@ -15,7 +15,7 @@ export type TextFieldProps = {
 const TextField = ({
   label,
   initialValue = '',
-  onInput,
+  onInputChange,
   icon,
   iconPosition = 'left',
   disabledInput = false,
@@ -29,7 +29,7 @@ const TextField = ({
     const newValue = e.currentTarget.value
     setValue(newValue)
 
-    !!onInput && onInput(newValue)
+    !!onInputChange && onInputChange(newValue)
   }
 
   return (

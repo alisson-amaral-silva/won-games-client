@@ -1,9 +1,15 @@
+import { MockedProvider } from '@apollo/client/testing'
+import React from 'react'
 import { render, screen } from 'utils/test-utils'
 import FormSignUp from '.'
 
 describe('<FormSignUp />', () => {
   it('should render the form', () => {
-    render(<FormSignUp />)
+    render(
+      <MockedProvider>
+        <FormSignUp />
+      </MockedProvider>
+    )
 
     expect(screen.getByPlaceholderText(/name/i)).toBeInTheDocument()
     expect(screen.getByPlaceholderText(/email/i)).toBeInTheDocument()
@@ -15,8 +21,11 @@ describe('<FormSignUp />', () => {
   })
 
   it('should render text and link to sign in', () => {
-    render(<FormSignUp />)
-
+    render(
+      <MockedProvider>
+        <FormSignUp />
+      </MockedProvider>
+    )
     expect(screen.getByRole('link', { name: /sign in/i })).toBeInTheDocument()
     expect(screen.getByText(/already have an account\?/i)).toBeInTheDocument()
   })
