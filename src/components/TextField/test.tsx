@@ -38,11 +38,11 @@ describe('<TextField />', () => {
   })
 
   it('Changes its value when typing', async () => {
-    const onInput = jest.fn()
+    const onInputChange = jest.fn()
     render(
       <TextField
         icon={<EmailOutline data-testid="icon" />}
-        onInput={onInput}
+        onInputChange={onInputChange}
         label="TextField"
         name="TextField"
       />
@@ -54,9 +54,9 @@ describe('<TextField />', () => {
 
     await waitFor(() => {
       expect(input).toHaveValue(text)
-      expect(onInput).toHaveBeenCalledTimes(text.length)
+      expect(onInputChange).toHaveBeenCalledTimes(text.length)
     })
-    expect(onInput).toHaveBeenCalledWith(text)
+    expect(onInputChange).toHaveBeenCalledWith(text)
   })
 
   it('Is accessible by tab', () => {
@@ -89,13 +89,13 @@ describe('<TextField />', () => {
   })
 
   it('should disable the textfield when disabled', async () => {
-    const onInput = jest.fn()
+    const onInputChange = jest.fn()
     render(
       <TextField
         icon={<EmailOutline data-testid="icon" />}
         label="TextField"
         name="TextField"
-        onInput={onInput}
+        onInputChange={onInputChange}
         iconPosition="right"
         disabledInput={true}
       />
@@ -110,7 +110,7 @@ describe('<TextField />', () => {
     await waitFor(() => {
       expect(input).not.toHaveValue(text)
     })
-    expect(onInput).not.toHaveBeenCalled()
+    expect(onInputChange).not.toHaveBeenCalled()
   })
 
   it('Is not accessible by tab when disabled', () => {
