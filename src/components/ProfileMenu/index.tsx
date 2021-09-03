@@ -47,7 +47,7 @@ const ProfileMenu = ({ activeLink }: ProfileMenuProps) => {
         onClick={handleSignOut}
         title="Sign out"
       >
-        <ExitToApp />
+        <ExitToApp size={24} />
         <span>Sign out</span>
       </S.Link>
     </S.Nav>
