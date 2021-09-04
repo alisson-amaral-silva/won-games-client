@@ -45,9 +45,7 @@ describe('<FormSignIn  />', () => {
       </MockedProvider>
     )
 
-    expect(
-      screen.getByRole('link', { name: /forgot your password\?/i })
-    ).toBeInTheDocument()
+    expect(screen.getByTestId(/forgot-password/i)).toBeInTheDocument()
   })
 
   it('should render the text and link to sign up', () => {
@@ -59,6 +57,6 @@ describe('<FormSignIn  />', () => {
 
     expect(screen.getByText(/don’t have an account\?/i)).toBeInTheDocument()
 
-    expect(screen.getByTestId(/mock base/i)).toBeInTheDocument()
+    expect(screen.getByTestId(/sign up/i)).toBeInTheDocument()
   })
 })
