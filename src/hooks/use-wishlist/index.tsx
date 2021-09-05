@@ -34,9 +34,7 @@ const WishlistProvider = ({ children }: WishlistProviderProps) => {
   const [wishlistItems, seWishlistItems] = useState<
     GetWishlist_wishlists_games[]
   >([])
-  const isInWishlist = (id: string) => false
-  const addToWishlist = (id: string) => {}
-  const removeFromWishlist = (id: string) => {}
+
   const { data, loading } = useGetWishlist({
     skip: !session?.user?.email,
     context: { session },
@@ -48,6 +46,13 @@ const WishlistProvider = ({ children }: WishlistProviderProps) => {
   useEffect(() => {
     seWishlistItems(data?.wishlists[0]?.games || [])
   }, [data])
+
+  const isInWishlist = (id: string) => {
+    return !!wishlistItems.find((game) => game.id === id)
+  }
+
+  const addToWishlist = (id: string) => {}
+  const removeFromWishlist = (id: string) => {}
 
   return (
     <WishlistContext.Provider
