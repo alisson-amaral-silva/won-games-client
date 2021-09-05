@@ -1,3 +1,4 @@
+import 'session.mock'
 import { MockedProvider } from '@apollo/client/testing'
 import filterItemsMock from 'components/ExploreSidebar/mock'
 import { render, screen } from 'utils/test-utils'

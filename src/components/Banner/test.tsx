@@ -1,3 +1,4 @@
+import 'session.mock'
 import Banner from '.'
 import { render, screen } from 'utils/test-utils'
 
