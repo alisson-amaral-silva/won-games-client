@@ -21,7 +21,6 @@ describe('FormForgotPassword', () => {
     ).toBeInTheDocument()
   })
 
-
   it('should show invalid email error message', async () => {
     render(<FormForgotPassword />)
 
@@ -33,7 +32,6 @@ describe('FormForgotPassword', () => {
       await screen.findByText(/must be a valid email/i)
     ).toBeInTheDocument()
   })
-
 
   it('should autofil email input if comes by logged user', async () => {
     query = { email: 'valid@gmail.com' }
