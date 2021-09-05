@@ -1,8 +1,13 @@
+import { useMutation } from '@apollo/client'
 import { GameCardProps } from 'components/GameCard'
 import { GetWishlist_wishlists_games } from 'graphql/generated/GetWishlist'
+import {
+  MUTATION_CREATE_WISHLIST,
+  MUTATION_UPDATE_WISHLIST
+} from 'graphql/mutations/wishlist'
 import { useGetWishlist } from 'graphql/queries/wishlist'
 import { useSession } from 'next-auth/client'
-import { createContext, useContext, useEffect, useState } from 'react'
+import { createContext, useContext, useEffect, useMemo, useState } from 'react'
 import { gamesMapper } from 'utils/mappers'
 
 export type WishlistContextData = {
@@ -31,9 +36,32 @@ export type WishlistProviderProps = {
 
 const WishlistProvider = ({ children }: WishlistProviderProps) => {
   const [session] = useSession()
-  const [wishlistItems, seWishlistItems] = useState<
+  const [wishlistId, setWishlistId] = useState<string | null>()
+  const [wishlistItems, setWishlistItems] = useState<
     GetWishlist_wishlists_games[]
   >([])
+
+  const [createList, { loading: loadingCreate }] = useMutation(
+    MUTATION_CREATE_WISHLIST,
+    {
+      context: { session },
+      onCompleted: (data) => {
+        setWishlistItems(data?.createWishlist?.wishlist?.games || [])
+        setWishlistId(data?.createWishlist?.wishlist?.id)
+      }
+    }
+  )
+
+  const [updateList, { loading: loadingUpdate }] = useMutation(
+    MUTATION_UPDATE_WISHLIST,
+    {
+      context: { session },
+      onCompleted: (data) => {
+        setWishlistItems(data?.updateWishlist?.wishlist?.games || [])
+        setWishlistId(data?.updateWishlist?.wishlist?.id)
+      }
+    }
+  )
 
   const { data, loading } = useGetWishlist({
     skip: !session?.user?.email,
@@ -44,14 +72,48 @@ const WishlistProvider = ({ children }: WishlistProviderProps) => {
   })
 
   useEffect(() => {
-    seWishlistItems(data?.wishlists[0]?.games || [])
+    setWishlistItems(data?.wishlists[0]?.games || [])
+    setWishlistId(data?.wishlists[0]?.id || null)
   }, [data])
 
   const isInWishlist = (id: string) => {
     return !!wishlistItems.find((game) => game.id === id)
   }
 
-  const addToWishlist = (id: string) => {}
+  const wishlistGameIds = useMemo(
+    () => wishlistItems.map((game) => game.id),
+    [wishlistItems]
+  )
+
+  const addToWishlist = (id: string) => {
+    //se não existir na wishlist - cria
+    if (!wishlistId) {
+      return createList({
+        variables: {
+          input: {
+            data: {
+              games: [...wishlistGameIds, id]
+            }
+          }
+        }
+      })
+    } else {
+      // senão atualiza a wishlist existente
+      return updateList({
+        variables: {
+          input: {
+            where: {
+              id: wishlistId
+            },
+            data: {
+              games: [...wishlistGameIds, id]
+            }
+          }
+        }
+      })
+    }
+  }
+
   const removeFromWishlist = (id: string) => {}
 
   return (
