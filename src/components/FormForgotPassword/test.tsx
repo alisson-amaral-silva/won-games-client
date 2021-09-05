@@ -1,6 +1,6 @@
 import userEvent from '@testing-library/user-event'
 import 'server.mock'
-import { screen, render, waitFor } from 'utils/test-utils'
+import { render, screen } from 'utils/test-utils'
 import FormForgotPassword from '.'
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
