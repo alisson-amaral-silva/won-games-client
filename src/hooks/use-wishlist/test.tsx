@@ -1,3 +1,4 @@
+import 'session.mock'
 import { MockedProvider } from '@apollo/client/testing'
 import { act, renderHook } from '@testing-library/react-hooks'
 import React from 'react'

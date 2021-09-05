@@ -1,3 +1,4 @@
+import 'session.mock'
 import 'match-media-mock'
 import { render, screen } from 'utils/test-utils'
 import Game, { GameTemplateProps } from '.'
@@ -8,6 +9,7 @@ import highlightMock from 'components/Highlight/mock'
 import { GameDetailsProps } from 'components/GameDetails'
 
 const gameInfo = {
+  id: '1',
   title: 'Kingdom hearts 3',
   price: 59,
   description:
