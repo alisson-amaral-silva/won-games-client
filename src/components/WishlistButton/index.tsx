@@ -15,7 +15,7 @@ const WishlistButton = ({
   size = 'small'
 }: WishlistButtonProps) => {
   const [session] = useSession()
-  const { isInWishlist } = useWishlist()
+  const { isInWishlist, removeFromWishlist, addToWishlist } = useWishlist()
   const ButtonText = isInWishlist(id)
     ? 'Remove from Wishlist'
     : 'Add to Wishlist'
@@ -44,10 +44,3 @@ const WishlistButton = ({
 }
 
 export default WishlistButton
-function removeFromWishlist(id: string) {
-  throw new Error('Function not implemented.')
-}
-
-function addToWishlist(id: string) {
-  throw new Error('Function not implemented.')
-}
