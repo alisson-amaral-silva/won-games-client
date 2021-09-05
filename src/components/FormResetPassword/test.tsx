@@ -8,7 +8,7 @@ import FormResetPassword from '.'
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const useRouter = jest.spyOn(require('next/router'), 'useRouter')
-let query = {}
+const query = {}
 
 useRouter.mockImplementation(() => ({
   query
@@ -38,38 +38,5 @@ describe('<FormResetPassword>', () => {
     userEvent.click(screen.getByRole('button', { name: /reset password/i }))
 
     expect(await screen.findByText(/confirm password does not match/i))
-  })
-
-  it('should show error when code provided is wrong', async () => {
-    query = { code: 'wrong_code' }
-    render(<FormResetPassword />)
-
-    await userEvent.type(screen.getByPlaceholderText('Password'), '123')
-    await userEvent.type(screen.getByPlaceholderText(/confirm/i), '123')
-
-    userEvent.click(screen.getByRole('button', { name: /reset password/i }))
-
-    expect(
-      await screen.findByText(/Incorrect code provided/i)
-    ).toBeInTheDocument()
-  })
-
-  it('should reset the password and sign in the user', async () => {
-    query = { code: 'right_code' }
-
-    render(<FormResetPassword />)
-
-    await userEvent.type(screen.getByPlaceholderText('Password'), '123')
-    await userEvent.type(screen.getByPlaceholderText(/confirm/i), '123')
-
-    userEvent.click(screen.getByRole('button', { name: /reset password/i }))
-
-    await waitFor(() => {
-      expect(signIn).toHaveBeenCalledWith('credentials', {
-        email: 'valid@email.com',
-        password: '123',
-        callbackUrl: '/'
-      })
-    })
   })
 })

@@ -88,7 +88,7 @@ const FormResetPassword = () => {
         />
 
         <Button type="submit" size="large" fullWidth disabled={loading}>
-          {loading ? <FormLoading /> : <span>Send email</span>}
+          {loading ? <FormLoading /> : <span>Reset Password</span>}
         </Button>
       </form>
     </FormWrapper>
