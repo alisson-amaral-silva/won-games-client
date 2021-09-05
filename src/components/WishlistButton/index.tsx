@@ -20,10 +20,15 @@ const WishlistButton = ({
     ? 'Remove from Wishlist'
     : 'Add to Wishlist'
 
+  const handleClick = () => {
+    isInWishlist(id) ? removeFromWishlist(id) : addToWishlist(id)
+  }
+
   if (!session) return null
 
   return (
     <Button
+      onClick={handleClick}
       icon={
         isInWishlist(id) ? (
           <Favorite aria-label={ButtonText} />
@@ -39,3 +44,10 @@ const WishlistButton = ({
 }
 
 export default WishlistButton
+function removeFromWishlist(id: string) {
+  throw new Error('Function not implemented.')
+}
+
+function addToWishlist(id: string) {
+  throw new Error('Function not implemented.')
+}
