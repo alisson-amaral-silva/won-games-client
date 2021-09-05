@@ -1,6 +1,6 @@
 import userEvent from '@testing-library/user-event'
 import 'server.mock'
-import { screen, render, waitFor } from 'utils/test-utils'
+import { render, screen } from 'utils/test-utils'
 import FormForgotPassword from '.'
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
@@ -21,7 +21,6 @@ describe('FormForgotPassword', () => {
     ).toBeInTheDocument()
   })
 
-
   it('should show invalid email error message', async () => {
     render(<FormForgotPassword />)
 
@@ -33,7 +32,6 @@ describe('FormForgotPassword', () => {
       await screen.findByText(/must be a valid email/i)
     ).toBeInTheDocument()
   })
-
 
   it('should autofil email input if comes by logged user', async () => {
     query = { email: 'valid@gmail.com' }
