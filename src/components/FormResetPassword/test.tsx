@@ -1,9 +1,6 @@
-import 'server.mock'
-import { signIn } from 'next-auth/client'
-
 import userEvent from '@testing-library/user-event'
-import { render, screen, waitFor } from 'utils/test-utils'
-
+import 'server.mock'
+import { render, screen } from 'utils/test-utils'
 import FormResetPassword from '.'
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
