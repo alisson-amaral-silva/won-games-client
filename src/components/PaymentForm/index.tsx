@@ -3,11 +3,17 @@ import { StripeCardElementChangeEvent } from '@stripe/stripe-js'
 import Button from 'components/Button'
 import Heading from 'components/Heading'
 import { useCart } from 'hooks/use-cart'
+import { Session } from 'next-auth/client'
 import React, { useEffect, useState } from 'react'
 import { ErrorOutline, ShoppingCart } from 'styled-icons/material-outlined'
+import { createPaymentIntent } from 'utils/stripe/methods'
 import * as S from './styles'
 
-const PaymentForm = () => {
+type PaymentFormProps = {
+  session: Session
+}
+
+const PaymentForm = ({ session }: PaymentFormProps) => {
   const [error, setError] = useState<string | null>(null)
   const [disabled, setDisabled] = useState(true)
   const { items } = useCart()
@@ -15,16 +21,35 @@ const PaymentForm = () => {
   const [freeGames, setFreeGames] = useState(false)
 
   useEffect(() => {
-    if (items.length) {
-      //bater na API /orders/create-payment-intent
-      //enviar itens do carrinho
-      //se receber freeGames: True -> setFreeGames
-      //seguir com o fluxo do jogo gratuito
-      //se receber erro, setError
-      //otherwise criou um intent
-      // setClientSecret
+    async function setPaymentMode() {
+      if (items.length) {
+        //bater na API /orders/create-payment-intent
+        //enviar itens do carrinho
+        const data = await createPaymentIntent({
+          items,
+          token: session.jwt
+        })
+        //se receber freeGames: True -> setFreeGames
+        //seguir com o fluxo do jogo gratuito
+        if (data.freeGames) {
+          setFreeGames(true)
+          return
+        }
+
+        //se receber erro, setError
+        if (data.error) {
+          setError(data.error)
+          return
+        }
+        //otherwise criou um intent
+        // setClientSecret
+
+        setClientSecret(data.client_secret)
+      }
     }
-  }, [])
+
+    setPaymentMode()
+  }, [items, session])
 
   const handleChange = async (event: StripeCardElementChangeEvent) => {
     setDisabled(event.empty)

@@ -1,7 +1,7 @@
 import { CartItem } from 'hooks/use-cart'
 
 type PaymentIntentParams = {
-  items: CartItem
+  items: CartItem[]
   token: string
 }
 
