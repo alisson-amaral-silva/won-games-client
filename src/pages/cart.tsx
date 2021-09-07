@@ -1,5 +1,3 @@
-import cartMock from 'components/CartList/mock'
-import cardsMock from 'components/PaymentOptions/mock'
 import { GetCart } from 'graphql/generated/GetCart'
 import { GET_CART } from 'graphql/queries/cart'
 import { GetServerSidePropsContext } from 'next'
@@ -24,9 +22,6 @@ export async function getServerSideProps(ctx: GetServerSidePropsContext) {
   return {
     props: {
       session,
-      items: cartMock,
-      total: 'R$ 330,00',
-      cards: cardsMock,
       highlight: highlightMapper(data.cart?.cart?.highlight),
       games: gamesMapper(data.cart?.cart?.games)
     }
