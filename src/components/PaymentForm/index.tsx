@@ -44,6 +44,7 @@ const PaymentForm = ({ session }: PaymentFormProps) => {
         //otherwise criou um intent
         // setClientSecret
 
+        setFreeGames(false)
         setClientSecret(data.client_secret)
       }
     }
@@ -63,17 +64,22 @@ const PaymentForm = ({ session }: PaymentFormProps) => {
           Payment
         </Heading>
 
-        <CardElement
-          options={{
-            hidePostalCode: true,
-            style: {
-              base: {
-                fontSize: '16px'
+        {freeGames ? (
+          <S.FreeGames>Only free games, click buy and enjoy!</S.FreeGames>
+        ) : (
+          <CardElement
+            options={{
+              hidePostalCode: true,
+              style: {
+                base: {
+                  fontSize: '16px'
+                }
               }
-            }
-          }}
-          onChange={handleChange}
-        />
+            }}
+            onChange={handleChange}
+          />
+        )}
+
         {error && (
           <S.Error>
             <ErrorOutline size={20} />
@@ -86,7 +92,7 @@ const PaymentForm = ({ session }: PaymentFormProps) => {
           Continue shopping
         </Button>
         <Button
-          disabled={disabled || !!error}
+          disabled={!freeGames && (disabled || !!error)}
           fullWidth
           icon={<ShoppingCart />}
         >
