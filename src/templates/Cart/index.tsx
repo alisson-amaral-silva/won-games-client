@@ -1,3 +1,6 @@
+import { loadStripe } from '@stripe/stripe-js'
+import { Elements } from '@stripe/react-stripe-js'
+
 import CartList, { CartListProps } from 'components/CartList'
 import { Container } from 'components/Container'
 import { Divider } from 'components/Divider'
@@ -8,12 +11,15 @@ import PaymentForm from 'components/PaymentForm'
 import Showcase from 'components/Showcase'
 import React from 'react'
 import Base from 'templates/Base'
+
 import * as S from './styles'
 
 export type CartProps = {
   games: GameCardProps[]
   highlight: HighlightProps
 } & CartListProps
+
+const stripe = loadStripe(`${process.env.NEXT_PUBLIC_STRIPE_PUBLISHIBLE_KEY}`)
 
 const Cart = ({ games, highlight }: CartProps) => {
   return (
@@ -25,7 +31,9 @@ const Cart = ({ games, highlight }: CartProps) => {
 
         <S.Content>
           <CartList />
-          <PaymentForm />
+          <Elements stripe={stripe}>
+            <PaymentForm />
+          </Elements>
         </S.Content>
 
         <Divider />
