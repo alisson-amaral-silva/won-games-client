@@ -25,7 +25,8 @@ const Success = ({
 }: SuccessTemplateProps) => {
   const { clearCart } = useCart()
 
-  useEffect(() => clearCart(), [clearCart])
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(() => clearCart(), [])
 
   return (
     <Base>
@@ -39,7 +40,7 @@ const Success = ({
 
           <S.Text>
             Wait for your payment details by email. Your game is now available
-            for download inside your{' '}
+            for download inside yours
             <Link href="/profile/orders">
               <a>Orders List</a>
             </Link>
