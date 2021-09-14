@@ -1,7 +1,7 @@
 import { gql } from '@apollo/client'
 import { GameFragment } from 'graphql/fragments/game'
 
-export const GET_Orders = gql`
+export const GET_ORDERS = gql`
   query GetOrders($identifier: ID!) {
     orders(where: { user: { id: $identifier } }) {
       id
