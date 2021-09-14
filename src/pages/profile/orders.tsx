@@ -1,13 +1,12 @@
 import OrdersList, { OrdersListProps } from 'components/OrdersList'
-import ordersMock from 'components/OrdersList/mock'
+import { GetOrders, GetOrdersVariables } from 'graphql/generated/GetOrders'
+import { GET_ORDERS } from 'graphql/queries/order'
 import { GetServerSidePropsContext } from 'next'
 import React from 'react'
 import Profile from 'templates/Profile'
 import { initializeApollo } from 'utils/apollo'
-import protectedRoutes from 'utils/protected-routes'
-import { GetOrders, GetOrdersVariables } from 'graphql/generated/GetOrders'
-import { GET_ORDERS } from 'graphql/queries/order'
 import { ordersMapper } from 'utils/mappers'
+import protectedRoutes from 'utils/protected-routes'
 
 export default function Cards({ items }: OrdersListProps) {
   return (
