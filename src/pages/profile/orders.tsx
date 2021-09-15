@@ -26,7 +26,9 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     query: GET_ORDERS,
     variables: {
       identifier: session?.id
-    }
+    },
+    //faz pegar os dados mais novos possiveis
+    fetchPolicy: 'no-cache'
   })
 
   return {

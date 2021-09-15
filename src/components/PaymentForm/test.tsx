@@ -1,12 +1,15 @@
-import items from 'components/CartList/mock'
 import { CartContextData, CartContextDefaultValues } from 'hooks/use-cart'
 import { Session } from 'next-auth/client'
-import * as stripeMethods from 'utils/stripe/methods'
 import { render, screen, waitFor } from 'utils/test-utils'
+
+import * as stripeMethods from 'utils/stripe/methods'
 import PaymentForm from '.'
+
+import items from 'components/CartList/mock'
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const useRouter = jest.spyOn(require('next/router'), 'useRouter')
+
 useRouter.mockImplementation(() => ({
   push: jest.fn()
 }))
@@ -42,7 +45,7 @@ jest.mock('@stripe/react-stripe-js', () => ({
 // create mock to createPaymentIntent method
 const createPaymentIntent = jest.spyOn(stripeMethods, 'createPaymentIntent')
 
-describe('PaymentForm', () => {
+describe('<PaymentForm />', () => {
   let session: Session
   let cartProviderProps: CartContextData
 
@@ -50,9 +53,9 @@ describe('PaymentForm', () => {
     session = {
       jwt: 'token',
       user: {
-        email: 'user@example.com'
+        email: 'won@games.com'
       },
-      expires: '123485'
+      expires: '13234'
     }
 
     cartProviderProps = {
@@ -65,10 +68,10 @@ describe('PaymentForm', () => {
     render(<PaymentForm session={session} />)
 
     expect(
-      screen.getByRole('heading', { name: /payment/i })
+      screen.getByRole('heading', { name: /Payment/i })
     ).toBeInTheDocument()
 
-    expect(screen.getByTestId(/mock CardElement/i)).toBeInTheDocument()
+    expect(screen.getByTestId(/Mock CardElement/i)).toBeInTheDocument()
 
     expect(screen.getByRole('button', { name: /buy now/i })).toBeDisabled()
   })
@@ -80,7 +83,7 @@ describe('PaymentForm', () => {
 
     expect(createPaymentIntent).toHaveBeenCalled()
 
-    waitFor(() => {
+    await waitFor(() => {
       expect(
         screen.getByText(/Only free games, click buy and enjoy!/i)
       ).toBeInTheDocument()
@@ -94,8 +97,8 @@ describe('PaymentForm', () => {
 
     expect(createPaymentIntent).toHaveBeenCalled()
 
-    waitFor(() => {
-      expect(screen.getByText(/Error message!/i)).toBeInTheDocument()
+    await waitFor(() => {
+      expect(screen.getByText(/Error message/i)).toBeInTheDocument()
     })
   })
 })
