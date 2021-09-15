@@ -5,6 +5,7 @@ import {
 } from '@styled-icons/material-outlined'
 import { signOut } from 'next-auth/client'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 import * as S from './styles'
 
 export type ProfileMenuProps = {
@@ -12,8 +13,11 @@ export type ProfileMenuProps = {
 }
 
 const ProfileMenu = ({ activeLink }: ProfileMenuProps) => {
-  const handleSignOut = () => {
-    signOut()
+  const { push } = useRouter()
+
+  const handleSignOut = async () => {
+    const data = await signOut({ redirect: false, callbackUrl: '/' })
+    push(data.url)
   }
 
   return (

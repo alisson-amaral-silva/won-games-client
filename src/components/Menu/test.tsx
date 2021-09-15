@@ -2,6 +2,15 @@ import { render, screen } from 'utils/test-utils'
 import Menu from '.'
 import { fireEvent } from '@testing-library/react'
 
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const useRouter = jest.spyOn(require('next/router'), 'useRouter')
+
+const query = {}
+
+useRouter.mockImplementation(() => ({
+  query
+}))
+
 describe('<Menu  />', () => {
   it('should render the menu', () => {
     render(<Menu />)

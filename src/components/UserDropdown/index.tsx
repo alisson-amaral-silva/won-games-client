@@ -8,14 +8,18 @@ import {
 } from '@styled-icons/material-outlined'
 import { ChevronDown } from '@styled-icons/boxicons-regular/ChevronDown'
 import { signOut } from 'next-auth/client'
+import { useRouter } from 'next/router'
 
 export type UserDropdownProps = {
   username: string
 }
 
 const UserDropdown = ({ username }: UserDropdownProps) => {
-  const handleSignOut = () => {
-    signOut()
+  const { push } = useRouter()
+
+  const handleSignOut = async () => {
+    const data = await signOut({ redirect: false, callbackUrl: '/' })
+    push(data.url)
   }
 
   return (
