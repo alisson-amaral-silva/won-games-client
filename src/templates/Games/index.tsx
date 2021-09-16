@@ -15,6 +15,7 @@ import * as S from './styles'
 import Empty from 'components/Empty'
 import React from 'react'
 import Loader from 'react-loader-spinner'
+import { getImageUrl } from 'utils/getImageUrl'
 
 export type GamesTemplateProps = {
   filterItems: ItemProps[]
@@ -73,7 +74,7 @@ const Games = ({ filterItems }: GamesTemplateProps) => {
                     title={game.name}
                     slug={game.slug}
                     developer={game.developers[0].name}
-                    img={`http://localhost:1337${game.cover!.url}`}
+                    img={`${getImageUrl(game.cover!.url)}`}
                     price={game.price}
                   />
                 ))}

@@ -1,16 +1,17 @@
 import { render, screen } from 'utils/test-utils'
+
 import Highlight from '.'
 import * as S from './styles'
 
 const props = {
   title: 'Heading 1',
   subtitle: 'Heading 2',
-  buttonLabel: 'Buy now',
   backgroundImage: '/img/red-dead-img.jpg',
-  buttonLink: '/rd2'
+  buttonLabel: 'Buy now',
+  buttonLink: '/rdr2'
 }
 
-describe('<Highlight  />', () => {
+describe('<Highlight />', () => {
   it('should render headings and button', () => {
     render(<Highlight {...props} />)
 
@@ -26,11 +27,11 @@ describe('<Highlight  />', () => {
   })
 
   it('should render background image', () => {
-    const { container } = render(<Highlight {...props} />)
+    render(<Highlight {...props} />)
 
-    expect(container.firstChild).toHaveStyle({
-      backgroundImage: `url(${props.backgroundImage})`
-    })
+    expect(
+      screen.getByRole('img', { name: `${props.title} background` })
+    ).toHaveAttribute('src', `${props.backgroundImage}`)
   })
 
   it('should render float image', () => {
@@ -55,7 +56,7 @@ describe('<Highlight  />', () => {
     })
   })
 
-  it('should render align left', () => {
+  it('should render align left when argument is passed', () => {
     const { container } = render(<Highlight {...props} alignment="left" />)
 
     expect(container.firstChild).toHaveStyleRule(
