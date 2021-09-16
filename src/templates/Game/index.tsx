@@ -33,7 +33,12 @@ const Game = ({
 }: GameTemplateProps) => (
   <Base>
     <S.Cover>
-      <Image src={cover} alt={gameInfo.title} layout="fill" />
+      <Image
+        data-testid={gameInfo.title}
+        src={cover}
+        alt={gameInfo.title}
+        layout="fill"
+      />
     </S.Cover>
     <S.Main>
       <S.SectionGameInfo>

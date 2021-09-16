@@ -1,15 +1,17 @@
 import { render, screen } from 'utils/test-utils'
+
 import Auth from '.'
 
-describe('<Auth  />', () => {
-  it('should render all components children', () => {
+describe('<Auth />', () => {
+  it('should render all components and children', () => {
     render(
-      <Auth title="Auth title">
-        <input type="text" />{' '}
+      <Auth title="Auth Title">
+        <input type="text" />
       </Auth>
     )
+
     // verifiquem se tem 2 logos
-    expect(screen.getAllByRole('img', { name: 'Won Games' })).toHaveLength(2)
+    expect(screen.getAllByRole('img', { name: 'Won Games' })).toHaveLength(1)
 
     // verifica se tem o heading principal do banner
     expect(
@@ -21,7 +23,7 @@ describe('<Auth  />', () => {
     // verifica se tem o subtitle
     expect(
       screen.getByRole('heading', {
-        name: /WON is the best and most complete game platform/i
+        name: /won is the best and most complete gaming platform/i
       })
     ).toBeInTheDocument()
 

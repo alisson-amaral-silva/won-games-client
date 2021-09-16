@@ -1,31 +1,31 @@
-import 'session.mock'
-import 'match-media-mock'
 import { render, screen } from 'utils/test-utils'
-import Game, { GameTemplateProps } from '.'
-import galleryMock from 'components/Gallery/mock'
-import gamesMock from 'components/GameCardSlider/mock'
-import gameDetailsMock from 'components/GameDetails/mock'
-import highlightMock from 'components/Highlight/mock'
-import { GameDetailsProps } from 'components/GameDetails'
 
-const gameInfo = {
-  id: '1',
-  title: 'Kingdom hearts 3',
-  price: 59,
-  description:
-    'KINGDOM HEARTS III tells the story of the power of friendship as Sora and his friends embark on a perilous adventure. Set in a vast array of Disney and Pixar worlds, KINGDOM HEARTS follows the journey of Sora, a young boy and unknowing heir to a spectacular power. Sora is joined by Donald Duck and Goofy to stop an evil force known as the Heartless from invading and overtaking the universe'
-}
+import galleryMock from 'components/Gallery/mock'
+import gameInfoMock from 'components/GameInfo/mock'
+import gameDetailsMock from 'components/GameDetails/mock'
+import gamesMock from 'components/GameCardSlider/mock'
+import highlightMock from 'components/Highlight/mock'
+
+import Game, { GameTemplateProps } from '.'
+import { GameDetailsProps } from 'components/GameDetails'
 
 const props: GameTemplateProps = {
   cover: 'bg-image.jpg',
-  gameInfo: gameInfo,
+  gameInfo: gameInfoMock,
   gallery: galleryMock,
-  description: '<h1>Custom HTML</h1>',
+  description: `<h1>Custom HTML</h1>`,
   details: gameDetailsMock as GameDetailsProps,
   upcommingGames: gamesMock,
   upcommingHighlight: highlightMock,
   recommendedGames: gamesMock
 }
+
+jest.mock('templates/Base', () => ({
+  __esModule: true,
+  default: function Mock({ children }: { children: React.ReactNode }) {
+    return <div data-testid="Mock Base">{children}</div>
+  }
+}))
 
 jest.mock('components/Menu', () => ({
   __esModule: true,
@@ -62,7 +62,7 @@ jest.mock('components/Showcase', () => ({
   }
 }))
 
-describe('<Game  />', () => {
+describe('<Game />', () => {
   it('should render the template with components', () => {
     render(<Game {...props} />)
     expect(screen.getByTestId('Mock Gallery')).toBeInTheDocument()
@@ -75,17 +75,17 @@ describe('<Game  />', () => {
   it('should not render the gallery if no images', () => {
     render(<Game {...props} gallery={undefined} />)
 
-    expect(screen.queryByTestId(/Mock Gallery/i)).not.toBeInTheDocument()
+    expect(screen.queryByTestId('Mock Gallery')).not.toBeInTheDocument()
   })
 
   it('should not render the gallery on mobile', () => {
     render(<Game {...props} />)
 
-    expect(screen.getByTestId(/Mock Gallery/i).parentElement).toHaveStyle({
+    expect(screen.getByTestId('Mock Gallery').parentElement).toHaveStyle({
       display: 'none'
     })
 
-    expect(screen.getByTestId(/Mock Gallery/i).parentElement).toHaveStyleRule(
+    expect(screen.getByTestId('Mock Gallery').parentElement).toHaveStyleRule(
       'display',
       'block',
       {
@@ -97,7 +97,9 @@ describe('<Game  />', () => {
   it('should render the cover image', () => {
     render(<Game {...props} />)
 
-    const cover = screen.getByRole('image', { name: /cover/i })
+    const cover = screen.getByRole('img', {
+      name: /Borderlands 3/i
+    }).parentElement
 
     expect(cover).toHaveStyleRule('height', '70rem', {
       media: '(min-width: 768px)'

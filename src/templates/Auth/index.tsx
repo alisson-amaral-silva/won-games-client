@@ -14,7 +14,7 @@ const Auth = ({ title, children }: AuthProps) => (
     <S.BannerBlock>
       <Image
         src="/img/auth-bg.jpg"
-        alt="Won Games Auth Page"
+        alt="Won Games"
         layout="fill"
         objectFit="cover"
       />
@@ -27,7 +27,7 @@ const Auth = ({ title, children }: AuthProps) => (
         <div>
           <Heading size="huge">All your favorite games in one place</Heading>
           <S.Subtitle>
-            <strong>WON</strong> is the best and most complete game platform
+            <strong>WON</strong> is the best and most complete gaming platform
           </S.Subtitle>
         </div>
         <S.Footer>Won Games 2021 Todos os Direitos Reservados</S.Footer>
