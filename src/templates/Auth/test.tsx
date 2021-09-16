@@ -9,7 +9,7 @@ describe('<Auth  />', () => {
       </Auth>
     )
     // verifiquem se tem 2 logos
-    expect(screen.getAllByRole('img', { name: /won games/i })).toHaveLength(2)
+    expect(screen.getAllByRole('img', { name: 'Won Games' })).toHaveLength(2)
 
     // verifica se tem o heading principal do banner
     expect(

@@ -5,6 +5,7 @@ import Slider, { SliderSettings } from '../Slider'
 import * as S from './styles'
 import { Close } from '@styled-icons/material-outlined/Close'
 import SlickSlider from 'react-slick'
+import Image from 'next/image'
 
 const commonSettings: SliderSettings = {
   arrows: true,
@@ -77,7 +78,9 @@ const Gallery = ({ items }: GallerySliderProps) => {
     <S.Wrapper>
       <Slider ref={slider} settings={settings}>
         {items.map((item, index) => (
-          <img
+          <Image
+            width={295}
+            height={165}
             src={item.src}
             key={index}
             role="button"
@@ -104,7 +107,13 @@ const Gallery = ({ items }: GallerySliderProps) => {
         <S.Content>
           <Slider ref={slider} settings={modalSettings}>
             {items.map((item, index) => (
-              <img src={item.src} key={`gallery-${index}`} alt={item.label} />
+              <Image
+                width={1200}
+                height={675}
+                key={`gallery-${index}`}
+                src={item.src}
+                alt={item.label}
+              />
             ))}
           </Slider>
         </S.Content>

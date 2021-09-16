@@ -1,5 +1,6 @@
 import * as S from './styles'
 import Button from '../Button'
+import Image from 'next/image'
 
 export type HighlightProps = {
   title: string
@@ -19,8 +20,13 @@ const Highlight = ({
   floatImage,
   alignment = 'right'
 }: HighlightProps) => (
-  <S.Wrapper alignment={alignment} backgroundImage={backgroundImage}>
-    {!!floatImage && <S.FloatImage src={floatImage} alt={title} />}
+  <S.Wrapper alignment={alignment}>
+    <Image src={backgroundImage} layout="fill" alt={title} />
+    {!!floatImage && (
+      <S.FloatImageWrapper>
+        <Image src={floatImage} width={400} height={300} alt={title} />
+      </S.FloatImageWrapper>
+    )}
     <S.Content>
       <S.Title>{title}</S.Title>
       <S.Subtitle>{subtitle}</S.Subtitle>
