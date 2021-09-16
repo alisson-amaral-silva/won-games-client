@@ -1,6 +1,7 @@
 import * as S from './styles'
 import Button from '../Button'
 import Ribbon, { RibbonColors, RibbonSize } from '../Ribbon'
+import Image from 'next/image'
 
 export type BannerProps = {
   img: string
@@ -24,7 +25,10 @@ const Banner = ({
   ribbonSize = 'normal'
 }: BannerProps) => (
   <S.Wrapper>
-    <S.Image src={img} role="img" aria-label={title} />
+    <S.ImageWrapper>
+      <Image src={img} alt={title} layout="fill" objectFit="cover" />
+    </S.ImageWrapper>
+
     {!!ribbon && (
       <Ribbon color={ribbonColor} size={ribbonSize}>
         {ribbon}
