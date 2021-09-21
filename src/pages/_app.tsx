@@ -1,5 +1,7 @@
 import { ApolloProvider } from '@apollo/client'
 import NextNprogress from 'nextjs-progressbar'
+import { DefaultSeo } from 'next-seo'
+import SEO from '../../next-seo.config'
 import { Provider as AuthProvider } from 'next-auth/client'
 import { CartProvider } from 'hooks/use-cart'
 import { AppProps } from 'next/app'
@@ -23,11 +25,9 @@ function App({ Component, pageProps }: AppProps) {
                 <link rel="shortcut icon" href="/img/icon-512.png" />
                 <link rel="apple-touch-icon" href="/img/icon-512.png" />
                 <link rel="manifest" href="/manifest.json" />
-                <meta
-                  name="description"
-                  content="A simple project starter to work with Typescript, react, nextJS and Styled Components"
-                />
+                <meta name="description" content="The best Game store ever" />
               </Head>
+              <DefaultSeo {...SEO} />
               <GlobalStyles />
               <NextNprogress
                 color="#F231A5"
