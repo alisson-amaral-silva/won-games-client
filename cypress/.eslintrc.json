@@ -1,11 +1,15 @@
 {
-  "plugins": ["cypress"],
+  "plugins": [
+    "cypress"
+  ],
   "root": true,
   "extends": [
     "plugin:cypress/recommended"
   ],
-  "env": { "cypress/globals": true },
+  "env": {
+    "cypress/globals": true
+  },
   "rules": {
     "jest/expect-expect": "off"
-}
+  }
 }
