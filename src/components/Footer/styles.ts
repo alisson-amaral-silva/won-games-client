@@ -40,8 +40,8 @@ export const Column = styled.div`
 
 export const Copyright = styled.div`
   ${({ theme }) => css`
-    color: ${theme.colors.gray};
-    font-size: ${theme.font.sizes.xsmall};
+    color: ${theme.colors.black};
+    font-size: ${theme.font.sizes.medium};
     margin-top: ${theme.spacings.large};
     margin-bottom: ${theme.spacings.medium};
     text-align: center;
