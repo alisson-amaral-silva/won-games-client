@@ -30,5 +30,28 @@ describe('Game Page', () => {
 
     //o método children pega os filhos de cada elemento la dentro
     cy.getByDataCy('content').children().should('have.length.at.least', 2)
+
+
+    //Details
+    cy.getByDataCy('game-details').within(() => {
+      cy.findByRole('heading', { name: /Game Details/i }).should('exist')
+      cy.findByRole('heading', { name: /Developer/i }).should('exist')
+      cy.findByRole('heading', { name: /Release Date/i }).should('exist')
+      cy.findByRole('heading', { name: /Platforms/i }).should('exist')
+      cy.findByRole('heading', { name: /Publisher/i }).should('exist')
+      cy.findByRole('heading', { name: /Rating/i }).should('exist')
+      cy.findByRole('heading', { name: /Genres/i }).should('exist')
+
+
+      cy.findByText("Oct 4, 2020").should('exist')
+      cy.findByRole('img', { name: /windows/i }).should('exist')
+      cy.findByRole('img', { name: /mac/i }).should('exist')
+      cy.findByText("FREE").should('exist')
+      cy.findByText("Role-playing / Fantasy / Turn-based").should('exist')
+    })
+
+
+    cy.shouldRenderShowcase({name: 'Upcomming', highlight: true})
+    cy.shouldRenderShowcase({name: 'You may like these games', highlight: false})
   })
 })
