@@ -37,10 +37,9 @@ describe('Explore Page', () => {
   })
 
   it('should order by price', () => {
-
-
     cy.findByText('Under $50').click()
     cy.location('href').should('contain', 'price_lte=50')
+
     cy.wait(1000)
 
     cy.getByDataCy('game-card').first().within(() => {
@@ -90,5 +89,25 @@ describe('Explore Page', () => {
     cy.getByDataCy('game-card').first().within(() => {
       cy.getGamesGreaterThan(0)
     })
+  })
+
+  it('should filter by platform and genre', () => {
+    cy.findByText(/windows/i).click()
+    cy.location('href').should('contain', 'platforms=windows')
+
+    cy.findByText(/action/i).click()
+    cy.location('href').should('contain', 'categories=action')
+  })
+
+  it('should return empty when no games are available', () => {
+    cy.findByText(/windows/i).click()
+    cy.findByText(/action/i).click()
+    cy.findByText(/linux/i).click()
+    cy.findByText(/jrpg/i).click()
+
+    cy.location('href').should('contain', 'platforms=linux&categories=jrpg')
+
+
+    cy.findByText(/We didn't find any games with this filter/i).should('exist')
   })
 })
