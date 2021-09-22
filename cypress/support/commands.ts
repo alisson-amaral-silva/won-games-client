@@ -26,6 +26,9 @@
 // Add Testing library commands
 import '@testing-library/cypress/add-commands'
 Cypress.Commands.add('google', () => cy.visit('https://google.com'))
+Cypress.Commands.add('getByDataCy', (selector, ...args) => {
+  return cy.get(`[data-cy="${selector}"]`, ...args)
+})
 
 Cypress.Commands.add('shouldRenderBanner', () => {
   //procurando a classe slick-slider e procurando o conteudo dentro dela
@@ -45,4 +48,20 @@ Cypress.Commands.add('shouldRenderBanner', () => {
 
   cy.findAllByRole('heading', { name: /aragami/i })[0]
   cy.findAllByRole('link', { name: /buy now/i })[0]
+})
+
+Cypress.Commands.add('shouldRenderShowcase', ({ name, highlight = false }) => {
+  cy.getByDataCy(name).within(() => {
+    cy.findByRole('heading', { name }).should('exist')
+
+    cy.getByDataCy("highlight").should(highlight ? 'exist' : 'not.exist')
+
+    if (highlight) {
+      cy.getByDataCy("highlight").within(() => {
+        cy.findByRole('link').should('have.attr', 'href')
+      })
+    }
+    cy.getByDataCy("card-games").should('have.length.gt', 0)
+
+  })
 })
