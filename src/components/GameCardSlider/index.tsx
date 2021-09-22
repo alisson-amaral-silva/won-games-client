@@ -49,7 +49,7 @@ export type GameCardSliderProps = {
 }
 
 const GameCardSlider = ({ items, color = 'white' }: GameCardSliderProps) => (
-  <S.Wrapper color={color}>
+  <S.Wrapper data-cy="card-games" color={color}>
     <Slider settings={settings}>
       {items.map((item, index) => (
         <GameCard key={index} {...item} />
