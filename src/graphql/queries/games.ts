@@ -29,6 +29,7 @@ export const GET_GAME_BY_SLUG = gql`
       release_date
       gallery {
         src: url
+        label: alternativeText
       }
       cover {
         src: url

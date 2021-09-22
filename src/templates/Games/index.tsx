@@ -13,7 +13,6 @@ import { Grid } from 'components/Grid'
 
 import * as S from './styles'
 import Empty from 'components/Empty'
-import React from 'react'
 import Loader from 'react-loader-spinner'
 import { getImageUrl } from 'utils/getImageUrl'
 
@@ -37,7 +36,8 @@ const Games = ({ filterItems }: GamesTemplateProps) => {
 
   const { games, gamesConnection } = data
 
-  const hasMoreGames = games.length < (gamesConnection?.values?.length || 0)
+  const hasMoreGames =
+    games && games.length < (gamesConnection?.values?.length || 0)
 
   const handleFilter = (items: ParsedUrlQueryInput) => {
     push({
@@ -64,7 +64,7 @@ const Games = ({ filterItems }: GamesTemplateProps) => {
         />
 
         <section>
-          {data?.games.length ? (
+          {data.games && data?.games.length ? (
             <>
               <Grid>
                 {data?.games.map((game) => (
