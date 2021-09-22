@@ -51,7 +51,7 @@ Cypress.Commands.add('getGamesLessThan', (value) => {
     .invoke('text') //transformando o método anterior em texto
     .then($el => $el.replace('$',''))// removendo cifrão
     .then(parseFloat) //transformando em valor string -> number
-    .should('be.lt', value) // verificando se o valor é maior doq 0
+    .should('be.lte', value) // verificando se o valor é maior doq 0
 })
 
 Cypress.Commands.add('shouldRenderBanner', () => {

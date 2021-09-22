@@ -37,6 +37,44 @@ describe('Explore Page', () => {
   })
 
   it('should order by price', () => {
+
+
+    cy.findByText('Under $50').click()
+    cy.location('href').should('contain', 'price_lte=50')
+    cy.wait(1000)
+
+    cy.getByDataCy('game-card').first().within(() => {
+      cy.getGamesLessThan(50)
+    })
+
+    cy.findByText(/Under \$100/i).click()
+    cy.location('href').should('contain', 'price_lte=100')
+
+    cy.getByDataCy('game-card').first().within(() => {
+      cy.getGamesLessThan(100)
+    })
+
+    cy.findByText(/Under \$150/i).click()
+    cy.location('href').should('contain', 'price_lte=150')
+
+    cy.getByDataCy('game-card').first().within(() => {
+      cy.getGamesLessThan(150)
+    })
+
+    cy.findByText(/Under \$250/i).click()
+    cy.location('href').should('contain', 'price_lte=250')
+
+    cy.getByDataCy('game-card').first().within(() => {
+      cy.getGamesLessThan(250)
+    })
+
+    cy.findByText(/Under \$500/i).click()
+    cy.location('href').should('contain', 'price_lte=500')
+
+    cy.getByDataCy('game-card').first().within(() => {
+      cy.getGamesLessThan(500)
+    })
+
     cy.findByText(/lowest to highest/i).click()
 
     cy.location('href').should('contain', 'sort=price%3Aasc')
