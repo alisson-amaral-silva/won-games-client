@@ -30,6 +30,12 @@ Cypress.Commands.add('getByDataCy', (selector, ...args) => {
   return cy.get(`[data-cy="${selector}"]`, ...args)
 })
 
+Cypress.Commands.add('getFields', (exploreFields) => {
+  return exploreFields.map(({label}) => {
+    cy.findByText(label).should('exist')
+  })
+})
+
 Cypress.Commands.add('shouldRenderBanner', () => {
   //procurando a classe slick-slider e procurando o conteudo dentro dela
   cy.get('.slick-slider').within(() => {
