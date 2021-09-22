@@ -31,7 +31,7 @@ Cypress.Commands.add('getByDataCy', (selector, ...args) => {
 })
 
 Cypress.Commands.add('getFields', (exploreFields) => {
-  return exploreFields.map(({label}) => {
+  exploreFields.map(({label}) => {
     cy.findByText(label).should('exist')
   })
 })

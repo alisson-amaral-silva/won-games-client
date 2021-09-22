@@ -15,7 +15,6 @@ describe('Explore Page', () => {
     cy.findByRole('heading', {name: /^price/i}).should('exist')
     cy.findByRole('heading', {name: /platforms/i}).should('exist')
     cy.findByRole('heading', {name: /genres/i}).should('exist')
-  })
 
   cy.getFields(priceFields)
 
@@ -24,4 +23,9 @@ describe('Explore Page', () => {
   cy.getFields(sortByPriceFields)
 
   cy.getFields(categoriesFields)
+  })
+
+
+
+
 })

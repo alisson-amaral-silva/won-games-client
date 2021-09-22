@@ -7,7 +7,7 @@ type ShowcaseAttributes = {
 }
 type ExploreFieldsAttributes = {
   label: string
-  name: string
+  name: string | number
 }
 
 declare namespace Cypress {
