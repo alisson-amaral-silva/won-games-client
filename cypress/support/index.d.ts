@@ -31,6 +31,18 @@ declare namespace Cypress {
       getFields(exploreFields: ExploreFieldsAttributes[]): Chainable<Element>
 
     /**
+     * Custom command to get price of games greater than certain value
+     * @example cy.getFields(priceFields)
+     */
+     getGamesGreaterThan(value: number): Chainable<Element>
+
+     /**
+     * Custom command to get price of games less than certain value
+     * @example cy.getFields(priceFields)
+     */
+      getGamesLessThan(value: number): Chainable<Element>
+
+    /**
      * Custom command to check banner in page and all it's content
      * @example cy.shouldRenderBanner()
      */

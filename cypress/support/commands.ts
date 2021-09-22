@@ -36,6 +36,24 @@ Cypress.Commands.add('getFields', (exploreFields) => {
   })
 })
 
+Cypress.Commands.add('getGamesGreaterThan', (value) => {
+  cy
+    .findByText(/^\$\d+(\.\d{1,2})?/) // regex para valor
+    .invoke('text') //transformando o método anterior em texto
+    .then($el => $el.replace('$',''))// removendo cifrão
+    .then(parseFloat) //transformando em valor string -> number
+    .should('be.gt', value) // verificando se o valor é maior doq 0
+})
+
+Cypress.Commands.add('getGamesLessThan', (value) => {
+  cy
+    .findByText(/^\$\d+(\.\d{1,2})?/) // regex para valor
+    .invoke('text') //transformando o método anterior em texto
+    .then($el => $el.replace('$',''))// removendo cifrão
+    .then(parseFloat) //transformando em valor string -> number
+    .should('be.lt', value) // verificando se o valor é maior doq 0
+})
+
 Cypress.Commands.add('shouldRenderBanner', () => {
   //procurando a classe slick-slider e procurando o conteudo dentro dela
   cy.get('.slick-slider').within(() => {
