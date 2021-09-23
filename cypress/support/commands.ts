@@ -31,7 +31,7 @@ Cypress.Commands.add('getByDataCy', (selector, ...args) => {
 })
 
 Cypress.Commands.add('getFields', (exploreFields) => {
-  exploreFields.map(({label}) => {
+  exploreFields.map(({ label }) => {
     cy.findByText(label).should('exist')
   })
 })
@@ -40,7 +40,7 @@ Cypress.Commands.add('getGamesGreaterThan', (value) => {
   cy
     .findByText(/^\$\d+(\.\d{1,2})?/) // regex para valor
     .invoke('text') //transformando o método anterior em texto
-    .then($el => $el.replace('$',''))// removendo cifrão
+    .then($el => $el.replace('$', ''))// removendo cifrão
     .then(parseFloat) //transformando em valor string -> number
     .should('be.gt', value) // verificando se o valor é maior doq 0
 })
@@ -49,7 +49,7 @@ Cypress.Commands.add('getGamesLessThan', (value) => {
   cy
     .findByText(/^\$\d+(\.\d{1,2})?/) // regex para valor
     .invoke('text') //transformando o método anterior em texto
-    .then($el => $el.replace('$',''))// removendo cifrão
+    .then($el => $el.replace('$', ''))// removendo cifrão
     .then(parseFloat) //transformando em valor string -> number
     .should('be.lte', value) // verificando se o valor é maior doq 0
 })
@@ -62,9 +62,7 @@ Cypress.Commands.add('signUp', (user) => {
   cy.findByRole('button', { name: /sign up now/i }).click()
 })
 
-Cypress.Commands.add('signIn', (email, password) => {
-  cy.url().should('eq', `${Cypress.config().baseUrl}/sign-in`)
-
+Cypress.Commands.add('signIn', (email = 'batman@gmail.com', password = 'Batman123') => {
   cy.findByPlaceholderText(/email/i).type(email)
   cy.findByPlaceholderText(/^password/i).type(password)
   cy.findByRole('button', { name: /sign in now/i }).click()
