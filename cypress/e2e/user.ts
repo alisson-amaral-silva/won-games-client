@@ -1,4 +1,3 @@
-import { media } from 'styled-media-query';
 /// <reference types="cypress" />
 
 import { createUser } from '../support/generate'
@@ -7,6 +6,8 @@ describe('User', () => {
   it('should sign up', () => {
     const user = createUser()
     cy.visit('/sign-up')
+
+    cy.wait(5000)
 
     cy.signUp(user)
 
