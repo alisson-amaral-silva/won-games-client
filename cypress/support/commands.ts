@@ -36,6 +36,18 @@ Cypress.Commands.add('getFields', (exploreFields) => {
   })
 })
 
+Cypress.Commands.add('getGameCardAndAddIntoCart', (cardNumber) => {
+  cy.getByDataCy('game-card').eq(cardNumber).within(() => {
+    cy.findByRole('button', { name: /add to cart/i }).click()
+  })
+})
+
+Cypress.Commands.add('getGameCardAndRemoveFromCart', (cardNumber) => {
+  cy.getByDataCy('game-card').eq(cardNumber).within(() => {
+    cy.findByRole('button', { name: /remove from cart/i }).click()
+  })
+})
+
 Cypress.Commands.add('getGamesGreaterThan', (value) => {
   cy
     .findByText(/^\$\d+(\.\d{1,2})?/) // regex para valor

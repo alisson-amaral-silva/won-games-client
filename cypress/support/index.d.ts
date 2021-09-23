@@ -34,6 +34,18 @@ declare namespace Cypress {
     getFields(exploreFields: ExploreFieldsAttributes[]): Chainable<Element>
 
     /**
+     * Custom command to get a specific game and add into the cart
+     * @example cy.getGameCardAndAddIntoCart(priceFields)
+     */
+     getGameCardAndAddIntoCart(cardNumber: number): Chainable<Element>
+
+     /**
+     * Custom command to get a specific game and remove from the cart
+     * @example cy.getGameCardAndRemoveFromCart(cardNumber)
+     */
+      getGameCardAndRemoveFromCart(cardNumber: number): Chainable<Element>
+
+    /**
      * Custom command to get price of games greater than certain value
      * @example cy.getGamesGreaterThan(value)
      */
