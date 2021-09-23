@@ -175,7 +175,7 @@ describe('ordersMapper()', () => {
         id: '1',
         paymentInfo: {
           flag: 'visa',
-          img: '/img/cards/visa.png',
+          img: '/img/visa.png',
           number: '**** **** **** 4242',
           purchaseDate: 'Purchase made on Apr 14, 2021'
         },

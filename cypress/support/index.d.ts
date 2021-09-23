@@ -37,13 +37,13 @@ declare namespace Cypress {
      * Custom command to get a specific game and add into the cart
      * @example cy.getGameCardAndAddIntoCart(priceFields)
      */
-     getGameCardAndAddIntoCart(cardNumber: number): Chainable<Element>
+    getGameCardAndAddIntoCart(cardNumber: number): Chainable<Element>
 
-     /**
+    /**
      * Custom command to get a specific game and remove from the cart
      * @example cy.getGameCardAndRemoveFromCart(cardNumber)
      */
-      getGameCardAndRemoveFromCart(cardNumber: number): Chainable<Element>
+    getGameCardAndRemoveFromCart(cardNumber: number): Chainable<Element>
 
     /**
      * Custom command to get price of games greater than certain value
@@ -55,13 +55,13 @@ declare namespace Cypress {
      * Custom command to type all the fields from Form Sign up and submit
      * @example cy.signUp(user)
      */
-     signUp(user: User): Chainable<Element>
+    signUp(user: User): Chainable<Element>
 
     /**
      * Custom command to type all the fields from Form Sign in and submit
      * @example cy.signIn(email, password)
      */
-     signIn(email: string, password: string): Chainable<Element>
+    signIn(email: string, password: string): Chainable<Element>
 
     /**
      * Custom command to get price of games less than certain value
