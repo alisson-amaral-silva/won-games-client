@@ -54,6 +54,14 @@ Cypress.Commands.add('getGamesLessThan', (value) => {
     .should('be.lte', value) // verificando se o valor é maior doq 0
 })
 
+Cypress.Commands.add('signUp', (user) => {
+  cy.findByPlaceholderText(/username/i).type(user.username)
+  cy.findByPlaceholderText(/email/i).type(user.email)
+  cy.findByPlaceholderText(/^password/i).type(user.password)
+  cy.findByPlaceholderText(/confirm password/i).type(user.password)
+  cy.findByRole('button', { name: /sign up now/i }).click()
+})
+
 Cypress.Commands.add('shouldRenderBanner', () => {
   //procurando a classe slick-slider e procurando o conteudo dentro dela
   cy.get('.slick-slider').within(() => {
@@ -86,6 +94,5 @@ Cypress.Commands.add('shouldRenderShowcase', ({ name, highlight = false }) => {
       })
     }
     cy.getByDataCy("card-games").should('have.length.gt', 0)
-
   })
 })
