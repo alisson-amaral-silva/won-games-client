@@ -62,6 +62,14 @@ Cypress.Commands.add('signUp', (user) => {
   cy.findByRole('button', { name: /sign up now/i }).click()
 })
 
+Cypress.Commands.add('signIn', (email, password) => {
+  cy.url().should('eq', `${Cypress.config().baseUrl}/sign-in`)
+
+  cy.findByPlaceholderText(/email/i).type(email)
+  cy.findByPlaceholderText(/^password/i).type(password)
+  cy.findByRole('button', { name: /sign in now/i }).click()
+})
+
 Cypress.Commands.add('shouldRenderBanner', () => {
   //procurando a classe slick-slider e procurando o conteudo dentro dela
   cy.get('.slick-slider').within(() => {

@@ -35,19 +35,25 @@ declare namespace Cypress {
 
     /**
      * Custom command to get price of games greater than certain value
-     * @example cy.getFields(priceFields)
+     * @example cy.getGamesGreaterThan(value)
      */
     getGamesGreaterThan(value: number): Chainable<Element>
 
     /**
      * Custom command to type all the fields from Form Sign up and submit
-     * @example cy.signUp(priceFields)
+     * @example cy.signUp(user)
      */
      signUp(user: User): Chainable<Element>
 
     /**
+     * Custom command to type all the fields from Form Sign in and submit
+     * @example cy.signIn(email, password)
+     */
+     signIn(email: string, password: string): Chainable<Element>
+
+    /**
      * Custom command to get price of games less than certain value
-     * @example cy.getFields(priceFields)
+     * @example cy.getGamesLessThan(value)
      */
     getGamesLessThan(value: number): Chainable<Element>
 
