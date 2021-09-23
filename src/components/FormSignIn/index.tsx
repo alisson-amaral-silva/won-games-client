@@ -34,20 +34,21 @@ const FormSignIn = () => {
     }
 
     setFieldError({})
-
+    // sign in
     const result = await signIn('credentials', {
       ...values,
       redirect: false,
-      callBackUrl: `${window.location.origin}${query?.callbackUrl || ''}`
+      callbackUrl: `${window.location.origin}${query?.callbackUrl || ''}`
     })
 
     if (result?.url) {
-      return push('/')
+      return push(result?.url)
     }
 
     setLoading(false)
 
-    setFormError('email or password is invalid')
+    // jogar o erro
+    setFormError('username or password is invalid')
   }
 
   return (

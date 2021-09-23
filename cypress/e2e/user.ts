@@ -1,3 +1,4 @@
+import { media } from 'styled-media-query';
 /// <reference types="cypress" />
 
 import { createUser } from '../support/generate'
@@ -19,7 +20,7 @@ describe('User', () => {
   it('should sign in and sign out', () => {
     cy.visit('/sign-in')
 
-    cy.signIn('batman@gmail.com', 'Batman123')
+    cy.signIn()
 
     cy.wait(3000)
 
@@ -31,6 +32,22 @@ describe('User', () => {
 
     cy.findByRole('link', { name: /sign in/i }).should('exist')
 
+  })
+
+  it('should sign in the user and redirect to the page that he was previously', () => {
+    cy.visit('/profile/me')
+
+    //redirecionar para o /sign-in com a callback do /profile/media
+    cy.location('href').should('eq', `${Cypress.config().baseUrl}/sign-in?callbackUrl=/profile/me`)
+
+    //fazer o sign in
+    cy.signIn()
+
+    // espero ser redirecionado para o profile/me
+    cy.location('href').should('eq', `${Cypress.config().baseUrl}/profile/me`)
+
+    cy.findByLabelText(/username/i).should('have.value', 'Batman')
+    cy.findByLabelText(/e-mail/i).should('have.value', 'batman@gmail.com')
   })
 
 })
