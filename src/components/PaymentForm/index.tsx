@@ -4,7 +4,7 @@ import Button from 'components/Button'
 import { FormLoading } from 'components/Form'
 import Heading from 'components/Heading'
 import { useCart } from 'hooks/use-cart'
-import { Session } from 'next-auth/client'
+import { Session } from 'next-auth'
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
 import { ErrorOutline, ShoppingCart } from 'styled-icons/material-outlined'
@@ -33,7 +33,7 @@ const PaymentForm = ({ session }: PaymentFormProps) => {
         //enviar itens do carrinho
         const data = await createPaymentIntent({
           items,
-          token: session.jwt
+          token: session.jwt as string
         })
         //se receber freeGames: True -> setFreeGames
         //seguir com o fluxo do jogo gratuito
@@ -67,7 +67,7 @@ const PaymentForm = ({ session }: PaymentFormProps) => {
     const data = await createPayment({
       items,
       paymentIntent,
-      token: session.jwt
+      token: session.jwt as string
     })
 
     return data

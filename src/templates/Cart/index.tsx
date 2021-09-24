@@ -13,7 +13,7 @@ import React from 'react'
 import Base from 'templates/Base'
 
 import * as S from './styles'
-import { Session } from 'next-auth/client'
+import { Session } from 'next-auth'
 
 export type CartProps = {
   session: Session
