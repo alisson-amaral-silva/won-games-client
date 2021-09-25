@@ -25,11 +25,11 @@ describe('User', () => {
 
     cy.wait(3000)
 
-    cy.findByText(/batman/i).should('exist').click()
+    cy.findByText(/cypress/i).should('exist').click()
 
     cy.findByText(/sign out/i).click()
 
-    cy.findByText(/batman/i).should('not.exist')
+    cy.findByText(/cypress/i).should('not.exist')
 
     cy.findByRole('link', { name: /sign in/i }).should('exist')
 
