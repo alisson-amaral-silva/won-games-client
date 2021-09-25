@@ -9,6 +9,8 @@ describe('Wishlist', () => {
     // redirecionar para o sign-in
     cy.signIn()
 
+    cy.wait(5000)
+
     // verifcar se a wishlist está vazia
     cy.findByRole('heading', { name: /Your wishlist is empty/i }).should('exist')
 
