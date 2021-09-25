@@ -1,6 +1,4 @@
-import { GetCart } from 'graphql/generated/GetCart'
 import { GetRecommended } from 'graphql/generated/GetRecommended'
-import { GET_CART } from 'graphql/queries/cart'
 import { GET_RECOMMENDED } from 'graphql/queries/recommended'
 import { GetServerSidePropsContext } from 'next'
 import Cart, { CartProps } from 'templates/Cart'
