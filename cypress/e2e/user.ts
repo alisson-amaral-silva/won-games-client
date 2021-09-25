@@ -21,6 +21,8 @@ describe('User', () => {
   it('should sign in and sign out', () => {
     cy.visit('/sign-in')
 
+    cy.wait(5000)
+
     cy.signIn()
 
     cy.wait(3000)
@@ -38,8 +40,12 @@ describe('User', () => {
   it('should sign in the user and redirect to the page that he was previously', () => {
     cy.visit('/profile/me')
 
+    cy.wait(5000)
+
     //redirecionar para o /sign-in com a callback do /profile/media
     cy.location('href').should('eq', `${Cypress.config().baseUrl}/sign-in?callbackUrl=/profile/me`)
+
+    cy.wait(5000)
 
     //fazer o sign in
     cy.signIn()
