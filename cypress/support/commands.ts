@@ -83,20 +83,20 @@ Cypress.Commands.add('signIn', (email = 'batman@gmail.com', password = 'Batman12
 Cypress.Commands.add('shouldRenderBanner', () => {
   //procurando a classe slick-slider e procurando o conteudo dentro dela
   cy.get('.slick-slider').within(() => {
-    cy.findAllByRole('heading', { name: /kingdom hearts/i })[0]
+    cy.findAllByRole('heading', { name: /cyberpunk 2077/i })[0]
     cy.findByRole('link', { name: /buy now/i })
   })
 
   cy.get('.slick-dots > :nth-child(2) > button').click()
   cy.wait(500)
 
-  cy.findAllByRole('heading', { name: /A light in the dark/i })[0]
+  cy.findAllByRole('heading', { name: /horizon zero dawn/i })[0]
   cy.findAllByRole('link', { name: /buy now/i })[0]
 
   cy.get('.slick-dots > :nth-child(3) > button').click()
   cy.wait(500)
 
-  cy.findAllByRole('heading', { name: /aragami/i })[0]
+  cy.findAllByRole('heading', { name: /huge promotion/i })[0]
   cy.findAllByRole('link', { name: /buy now/i })[0]
 })
 

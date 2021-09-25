@@ -15,7 +15,6 @@ import { GetStaticProps } from 'next'
 import { useRouter } from 'next/router'
 import Game, { GameTemplateProps } from 'templates/Game'
 import { initializeApollo } from 'utils/apollo'
-import { getImageUrl } from 'utils/getImageUrl'
 import { gamesMapper, highlightMapper } from 'utils/mappers'
 
 const apolloClient = initializeApollo()
@@ -79,7 +78,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     revalidate: 60,
     props: {
       slug: params?.slug,
-      cover: `${getImageUrl(game.cover?.src)}`,
+      cover: game.cover?.src,
       gameInfo: {
         id: game.id,
         title: game.name,
@@ -87,7 +86,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
         description: game.short_description
       },
       gallery: game.gallery.map((image) => ({
-        src: `${getImageUrl(image.src)}`
+        src: image.src
       })),
       description: game.description,
       details: {
