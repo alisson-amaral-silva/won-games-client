@@ -1,47 +1,34 @@
-/// <reference types="cypress" />
-
+/// <reference path="../support/index.d.ts" />
 
 describe('Wishlist', () => {
-  it('should add/remove games fro wishlist', () => {
-    // acessar pagina de wishlist não logadas
+  it('should add and remove games from wishlist', () => {
+    // acessa a página não logado
     cy.visit('/wishlist')
+
+    // redireciona e faz signIn
+    cy.signIn()
 
     cy.wait(5000)
 
-    // redirecionar para o sign-in
-    cy.signIn()
+    // verifica se a wishlist tá vazia
+    cy.findByText(/your wishlist is empty/i).should('exist')
 
-    cy.wait(10000)
-
-    // verifcar se a wishlist está vazia
-    cy.getByDataCy('empty-list').should('exist')
-
-    // pegar um jogo e add na wishlist
+    // pegar um jogo e adicionar
     cy.getByDataCy('game-card').eq(0).within(() => {
       cy.findAllByLabelText(/add to wishlist/i).click()
     })
 
-
-    cy.wait(5000)
-
-    // verificar se o jogo está la
+    // verificar se o jogo está lá
     cy.getByDataCy('wishlist').within(() => {
       cy.getByDataCy('game-card').should('have.length', 1)
     })
 
-
-    cy.wait(5000)
-
     // remover esse jogo
-    cy.getByDataCy('wishlist').within(() => {
+    cy.getByDataCy('wishlist').eq(0).within(() => {
       cy.findAllByLabelText(/remove from wishlist/i).click()
     })
 
-
-    cy.wait(10000)
-
-    //verificar se a wishlist está vazia
-    cy.getByDataCy('empty-list').should('exist')
-
-  })
-})
+    // verifica se a wishlist tá vazia
+    cy.findByText(/your wishlist is empty/i).should('exist')
+  });
+});

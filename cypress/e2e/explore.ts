@@ -1,11 +1,6 @@
-/// <reference types="cypress" />
+/// <reference path="../support/index.d.ts" />
 
-import {
-  priceFields,
-  platformFields,
-  sortByPriceFields,
-  categoriesFields
-} from '../../src/utils/filter/fields'
+import { priceFields, categoriesFields, platformFields, sortByPriceFields} from '../../src/utils/filter/fields'
 
 describe('Explore Page', () => {
   before(() => {
@@ -13,72 +8,25 @@ describe('Explore Page', () => {
   })
 
   it('should render filters columns', () => {
-
     cy.findByRole('heading', { name: /sort by price/i }).should('exist')
     cy.findByRole('heading', { name: /^price/i }).should('exist')
     cy.findByRole('heading', { name: /platforms/i }).should('exist')
     cy.findByRole('heading', { name: /genres/i }).should('exist')
 
-    cy.getFields(priceFields)
-
-    cy.getFields(platformFields)
-
     cy.getFields(sortByPriceFields)
-
+    cy.getFields(priceFields)
+    cy.getFields(platformFields)
     cy.getFields(categoriesFields)
-  })
+  });
 
   it('should show 15 games and show more games when show more is clicked', () => {
     cy.getByDataCy('game-card').should('have.length', 15)
-
     cy.findByRole('button', { name: /show more/i }).click()
-
     cy.getByDataCy('game-card').should('have.length', 30)
-  })
+  });
 
   it('should order by price', () => {
-    cy.findByText('Under $50').click()
-
-    cy.wait(5000)
-
-    cy.location('href').should('contain', 'price_lte=50')
-
-    cy.wait(5000)
-
-    cy.getByDataCy('game-card').first().within(() => {
-      cy.getGamesLessThan(50)
-    })
-
-    cy.findByText(/Under \$100/i).click()
-    cy.location('href').should('contain', 'price_lte=100')
-
-    cy.getByDataCy('game-card').first().within(() => {
-      cy.getGamesLessThan(100)
-    })
-
-    cy.findByText(/Under \$150/i).click()
-    cy.location('href').should('contain', 'price_lte=150')
-
-    cy.getByDataCy('game-card').first().within(() => {
-      cy.getGamesLessThan(150)
-    })
-
-    cy.findByText(/Under \$250/i).click()
-    cy.location('href').should('contain', 'price_lte=250')
-
-    cy.getByDataCy('game-card').first().within(() => {
-      cy.getGamesLessThan(250)
-    })
-
-    cy.findByText(/Under \$500/i).click()
-    cy.location('href').should('contain', 'price_lte=500')
-
-    cy.getByDataCy('game-card').first().within(() => {
-      cy.getGamesLessThan(500)
-    })
-
     cy.findByText(/lowest to highest/i).click()
-
     cy.location('href').should('contain', 'sort=price%3Aasc')
 
     cy.getByDataCy('game-card').first().within(() => {
@@ -86,36 +34,77 @@ describe('Explore Page', () => {
     })
 
     cy.findByText(/highest to lowest/i).click()
-
     cy.location('href').should('contain', 'sort=price%3Adesc')
 
     cy.getByDataCy('game-card').first().within(() => {
       cy.getGamesGreaterThan(0)
     })
-  })
+  });
+
+  it('should filter by price', () => {
+    cy.findByText(/highest to lowest/i).click()
+
+    cy.findByText(/free/i).click()
+    cy.location('href').should('contain', 'price_lte=0')
+    cy.getByDataCy('game-card').first().within(() => {
+      cy.findByText('$0.00').should('exist')
+    })
+
+    cy.findByText('Under $50').click()
+    cy.location('href').should('contain', 'price_lte=50')
+    cy.getByDataCy('game-card').first().within(() => {
+      cy.getGamesLessThan(50)
+    })
+
+    cy.findByText('Under $100').click()
+    cy.location('href').should('contain', 'price_lte=100')
+    cy.getByDataCy('game-card').first().within(() => {
+      cy.getGamesLessThan(100)
+    })
+
+    cy.findByText('Under $150').click()
+    cy.location('href').should('contain', 'price_lte=150')
+    cy.getByDataCy('game-card').first().within(() => {
+      cy.getGamesLessThan(150)
+    })
+
+    cy.findByText('Under $250').click()
+    cy.location('href').should('contain', 'price_lte=250')
+    cy.getByDataCy('game-card').first().within(() => {
+      cy.getGamesLessThan(250)
+    })
+
+    cy.findByText('Under $500').click()
+    cy.location('href').should('contain', 'price_lte=500')
+    cy.getByDataCy('game-card').first().within(() => {
+      cy.getGamesLessThan(500)
+    })
+  });
 
   it('should filter by platform and genre', () => {
     cy.findByText(/windows/i).click()
-    cy.wait(5000)
-
     cy.location('href').should('contain', 'platforms=windows')
 
-    cy.findByText(/action/i).click()
-    cy.wait(5000)
-
-    cy.location('href').should('contain', 'categories=action')
-  })
-
-  it('should return empty when no games are available', () => {
-    cy.findByText(/windows/i).click()
-    cy.findByText(/action/i).click()
     cy.findByText(/linux/i).click()
-    cy.findByText(/jrpg/i).click()
-    cy.wait(5000)
+    cy.location('href').should('contain', 'platforms=linux')
 
-    cy.location('href').should('contain', 'platforms=linux&categories=jrpg')
+    cy.findByText(/mac os/i).click()
+    cy.location('href').should('contain', 'platforms=mac')
+
+    cy.findByText(/action/i).click()
+    cy.location('href').should('contain', 'categories=action')
+  });
+
+  it('should return empty when no games match', () => {
+    // clear url
+    cy.visit('/games')
 
 
+    cy.findByText(/free/i).click()
+    cy.findByText(/linux/i).click()
+    cy.findByText(/sports/i).click()
+
+    cy.getByDataCy('game-card').should('not.exist')
     cy.findByText(/We didn't find any games with this filter/i).should('exist')
-  })
-})
+  });
+});
