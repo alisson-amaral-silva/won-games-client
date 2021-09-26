@@ -27,6 +27,7 @@ describe('Explore Page', () => {
 
   it('should order by price', () => {
     cy.findByText(/lowest to highest/i).click()
+    cy.wait(5000)
     cy.location('href').should('contain', 'sort=price%3Aasc')
 
     cy.getByDataCy('game-card').first().within(() => {
