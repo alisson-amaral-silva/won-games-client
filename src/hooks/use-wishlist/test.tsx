@@ -1,11 +1,10 @@
-import 'session.mock'
 import { MockedProvider } from '@apollo/client/testing'
 import { act, renderHook } from '@testing-library/react-hooks'
 import React from 'react'
+import 'session.mock'
 import { waitFor } from 'utils/test-utils'
 import { useWishlist, WishlistProvider } from '.'
 import {
-  createWishlistMock,
   removeWishlistMock,
   updateWishlistMock,
   wishlistItems,
