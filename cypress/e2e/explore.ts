@@ -38,6 +38,9 @@ describe('Explore Page', () => {
 
   it('should order by price', () => {
     cy.findByText('Under $50').click()
+
+    cy.wait(5000)
+
     cy.location('href').should('contain', 'price_lte=50')
 
     cy.wait(5000)

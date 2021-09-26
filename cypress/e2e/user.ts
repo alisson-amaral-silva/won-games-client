@@ -25,7 +25,7 @@ describe('User', () => {
 
     cy.signIn()
 
-    cy.wait(5000)
+    cy.wait(10000)
 
     cy.getByDataCy('username').should('exist').click()
 
@@ -39,6 +39,10 @@ describe('User', () => {
 
   it('should sign in the user and redirect to the page that he was previously', () => {
     cy.wait(5000)
+
+    cy.getByDataCy('username').should('exist').click()
+
+    cy.findByText(/sign out/i).click()
 
     cy.visit('/profile/me')
 
