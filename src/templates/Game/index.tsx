@@ -12,7 +12,7 @@ import { Divider } from 'components/Divider'
 import Image from 'next/image'
 
 export type GameTemplateProps = {
-  slug: string
+  slug?: string
   cover: string
   gameInfo: GameInfoProps
   gallery?: GalleryImageProps[]

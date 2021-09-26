@@ -6,6 +6,7 @@ import highlightMock from 'components/Highlight/mock'
 import { WishlistContextDefaultValues } from 'hooks/use-wishlist'
 
 const props: WishlistTemplateProps = {
+  recommendedTitle: 'You may like these games',
   recommendedHighlight: highlightMock,
   recommendedGames: gamesMock
 }
@@ -43,6 +44,7 @@ describe('<Wishlist  />', () => {
     }
     render(
       <Wishlist
+        recommendedTitle="You may like these games"
         recommendedGames={gamesMock}
         recommendedHighlight={highlightMock}
       />,

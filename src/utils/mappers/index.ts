@@ -31,7 +31,7 @@ export const gamesMapper = (
         title: game.name,
         slug: game.slug,
         developer: game.developers[0].name,
-        img: game.cover?.url,
+        img: game.cover?.url as string,
         price: game.price
       }))
     : []
@@ -57,7 +57,7 @@ export const cartMapper = (games: GetGames_games[] | undefined) => {
   return games
     ? games.map((game) => ({
         id: game.id,
-        img: game.cover?.url,
+        img: game.cover?.url as string,
         title: game.name,
         price: formatPrice(game.price)
       }))
