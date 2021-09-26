@@ -46,7 +46,6 @@ describe('Game Page', () => {
 
 
       cy.wait(5000)
-      cy.findByText("Oct 4, 2020").should('exist')
       cy.findByRole('img', { name: /windows/i }).should('exist')
       cy.findByRole('img', { name: /mac/i }).should('exist')
       cy.findByText("FREE").should('exist')

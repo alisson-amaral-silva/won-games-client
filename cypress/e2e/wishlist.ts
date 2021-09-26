@@ -11,10 +11,10 @@ describe('Wishlist', () => {
     // redirecionar para o sign-in
     cy.signIn()
 
-    cy.wait(8000)
+    cy.wait(10000)
 
     // verifcar se a wishlist está vazia
-    cy.findByRole('heading', { name: /Your wishlist is empty/i }).should('exist')
+    cy.getByDataCy('empty-list').should('exist')
 
     // pegar um jogo e add na wishlist
     cy.getByDataCy('game-card').eq(0).within(() => {
@@ -38,10 +38,10 @@ describe('Wishlist', () => {
     })
 
 
-    cy.wait(8000)
+    cy.wait(10000)
 
     //verificar se a wishlist está vazia
-    cy.findByRole('heading', { name: /Your wishlist is empty/i }).should('exist')
+    cy.getByDataCy('empty-list').should('exist')
 
   })
 })

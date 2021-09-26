@@ -27,17 +27,19 @@ describe('User', () => {
 
     cy.wait(5000)
 
-    cy.findByText(/batman/i).should('exist').click()
+    cy.getByDataCy('username').should('exist').click()
 
     cy.findByText(/sign out/i).click()
 
-    cy.findByText(/batman/i).should('not.exist')
+    cy.getByDataCy('username').should('not.exist')
 
     cy.findByRole('link', { name: /sign in/i }).should('exist')
 
   })
 
   it('should sign in the user and redirect to the page that he was previously', () => {
+    cy.wait(5000)
+
     cy.visit('/profile/me')
 
     cy.wait(5000)

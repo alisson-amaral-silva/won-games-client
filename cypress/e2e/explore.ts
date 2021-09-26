@@ -40,7 +40,7 @@ describe('Explore Page', () => {
     cy.findByText('Under $50').click()
     cy.location('href').should('contain', 'price_lte=50')
 
-    cy.wait(1000)
+    cy.wait(5000)
 
     cy.getByDataCy('game-card').first().within(() => {
       cy.getGamesLessThan(50)
