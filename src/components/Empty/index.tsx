@@ -18,7 +18,7 @@ const Empty = ({ title, description, hasLink }: EmptyProps) => (
       width={380}
       height={285}
     />
-    <S.Title>{title}</S.Title>
+    <S.Title data-cy="empty-list">{title}</S.Title>
     <S.Description>{description}</S.Description>
     {hasLink && (
       <Link href="/" passHref>

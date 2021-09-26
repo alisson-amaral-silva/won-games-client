@@ -1,20 +1,15 @@
-import { ParsedUrlQueryInput } from 'querystring'
-import { useRouter } from 'next/router'
-
-import { useQueryGames } from 'graphql/queries/games'
-import { parseQueryStringToFilter, parseQueryStringToWhere } from 'utils/filter'
-
-import Base from 'templates/Base'
 import { KeyboardArrowDown as ArrowDown } from '@styled-icons/material-outlined/KeyboardArrowDown'
-
+import Empty from 'components/Empty'
 import ExploreSidebar, { ItemProps } from 'components/ExploreSidebar'
 import GameCard from 'components/GameCard'
 import { Grid } from 'components/Grid'
-
-import * as S from './styles'
-import Empty from 'components/Empty'
+import { useQueryGames } from 'graphql/queries/games'
+import { useRouter } from 'next/router'
+import { ParsedUrlQueryInput } from 'querystring'
 import Loader from 'react-loader-spinner'
-import { getImageUrl } from 'utils/getImageUrl'
+import Base from 'templates/Base'
+import { parseQueryStringToFilter, parseQueryStringToWhere } from 'utils/filter'
+import * as S from './styles'
 
 export type GamesTemplateProps = {
   filterItems: ItemProps[]
@@ -74,7 +69,7 @@ const Games = ({ filterItems }: GamesTemplateProps) => {
                     title={game.name}
                     slug={game.slug}
                     developer={game.developers[0].name}
-                    img={`${getImageUrl(game.cover!.url)}`}
+                    img={game.cover!.url}
                     price={game.price}
                   />
                 ))}

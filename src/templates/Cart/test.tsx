@@ -5,6 +5,13 @@ import { render, screen } from 'utils/test-utils'
 import Cart from '.'
 
 const props = {
+  session: {
+    jwt: 'token',
+    user: {
+      email: 'won@games.com'
+    },
+    expires: '13234'
+  },
   highlight: highlightMock,
   games: gamesMock
 }

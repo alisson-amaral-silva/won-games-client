@@ -7,7 +7,7 @@ describe('Game Page', () => {
   })
 
   it('should render game page sections', () => {
-    cy.wait(500)
+    cy.wait(5000)
 
     cy.getByDataCy('game-info').within(() => {
       cy.findByRole('heading', { name: /Baldur's Gate 3/i }).should('exist')
@@ -20,7 +20,7 @@ describe('Game Page', () => {
 
     })
 
-    cy.wait(500)
+    cy.wait(5000)
 
     //gallery
     cy.findAllByRole('button', { name: /^thumb\-/i }).should('have.length.gt', 0)
@@ -45,7 +45,7 @@ describe('Game Page', () => {
       cy.findByRole('heading', { name: /Genres/i }).should('exist')
 
 
-      cy.findByText("Oct 4, 2020").should('exist')
+      cy.wait(5000)
       cy.findByRole('img', { name: /windows/i }).should('exist')
       cy.findByRole('img', { name: /mac/i }).should('exist')
       cy.findByText("FREE").should('exist')

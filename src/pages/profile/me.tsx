@@ -25,7 +25,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   const { data } = await apolloClient.query<GetProfile, GetProfileVariables>({
     query: GET_PROFILE,
     variables: {
-      identifier: session?.id
+      identifier: session?.id as string
     }
   })
 
