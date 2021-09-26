@@ -93,9 +93,13 @@ describe('Explore Page', () => {
 
   it('should filter by platform and genre', () => {
     cy.findByText(/windows/i).click()
+    cy.wait(5000)
+
     cy.location('href').should('contain', 'platforms=windows')
 
     cy.findByText(/action/i).click()
+    cy.wait(5000)
+
     cy.location('href').should('contain', 'categories=action')
   })
 
@@ -104,6 +108,7 @@ describe('Explore Page', () => {
     cy.findByText(/action/i).click()
     cy.findByText(/linux/i).click()
     cy.findByText(/jrpg/i).click()
+    cy.wait(5000)
 
     cy.location('href').should('contain', 'platforms=linux&categories=jrpg')
 

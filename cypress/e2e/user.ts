@@ -11,7 +11,7 @@ describe('User', () => {
 
     cy.signUp(user)
 
-    cy.wait(3000)
+    cy.wait(5000)
 
     cy.url().should('eq', `${Cypress.config().baseUrl}/`)
 
@@ -25,7 +25,7 @@ describe('User', () => {
 
     cy.signIn()
 
-    cy.wait(3000)
+    cy.wait(5000)
 
     cy.findByText(/batman/i).should('exist').click()
 
@@ -49,6 +49,8 @@ describe('User', () => {
 
     //fazer o sign in
     cy.signIn()
+
+    cy.wait(5000)
 
     // espero ser redirecionado para o profile/me
     cy.location('href').should('eq', `${Cypress.config().baseUrl}/profile/me`)
